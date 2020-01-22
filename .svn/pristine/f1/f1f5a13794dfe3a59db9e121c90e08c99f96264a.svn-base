@@ -1,0 +1,34 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPHe">
+    <div class="panel-heading" role="tab" id="headingPHe">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title"><span class="label label-info">S</span> Haushalt-Eigenheim</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="isPanelBodyPHe = !isPanelBodyPHe">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isPanelBodyPHe"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isPanelBodyPHe"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePHe" class="panel-collapse collapse" [ngClass]="{in: isPanelBodyPHe == true}" role="tabpanel" aria-labelledby="headingPHe">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="btn-group btn-group-xs dropdown">
+                        <button type="button" class="btn btn-primary btn-xs" title="Versichertes Objekt NEU..." dropdownToggle><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Haushalt/Eigenheim <span class="caret" aria-hidden="true"></span></button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="#">Haushalt</a></li>
+                            <li role="menuitem"><a href="#">Eigenheim</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem"><a href="#">Bündel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h4><span class="label label-warning">ACHTUNG: Versicherte(s) Objekte(e) anlegen!</span></h4>
+        </div>
+    </div>
+</div>

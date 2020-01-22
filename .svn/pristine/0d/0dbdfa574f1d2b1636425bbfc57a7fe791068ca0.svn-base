@@ -1,0 +1,50 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingPVn">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title">Versicherungsnehmer</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="onToggleCollapseable()">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isCollapsed"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isCollapsed"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePVn" class="panel-collapse collapse" [ngClass]="{in: isCollapsed == true}" role="tabpanel" aria-labelledby="headingPVn">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary btn-xs" title="Versicherungsnehmer NEU..." (click)="onVnNew()" [disabled]="vn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Versicherungsnehmer</button>
+                </div>
+            </div>
+            <hr />
+            <!-- Vn New -->
+            <vn-edit [modus]="modus"
+                     [vn]="vnNew"
+                     [isEnabledPFp]="isEnabledPFp"
+                     [isEnabledPKv]="isEnabledPKv"
+                     [isEnabledPUv]="isEnabledPUv"
+                     [isEnabledPKfz]="isEnabledPKfz"
+                     [isEnabledPHe]="isEnabledPHe"
+                     [isEnabledPRs]="isEnabledPRs"
+                     (onEmitVn)="doVnAdd($event)"
+                     *ngIf="vnNew !== undefined"></vn-edit>
+            <br *ngIf="vnNew !== undefined" />
+            <!-- Vn View/Edit -->
+            <vn-list [modus]="modus"
+                     [vn]="vn"
+                     [isEnabledPFp]="isEnabledPFp"
+                     [isEnabledPKv]="isEnabledPKv"
+                     [isEnabledPUv]="isEnabledPUv"
+                     [isEnabledPKfz]="isEnabledPKfz"
+                     [isEnabledPHe]="isEnabledPHe"
+                     [isEnabledPRs]="isEnabledPRs"
+                     (onEmitVnUpdate)="doVnUpdate($event)"
+                     (onEmitVnDelete)="doVnDelete()"
+                     *ngIf="vn !== undefined"></vn-list>
+            <h4 *ngIf="vn == undefined && vnNew == undefined"><span class="label label-warning">ACHTUNG: Versicherungsnehmer anlegen!</span></h4>
+        </div>
+    </div>
+</div>

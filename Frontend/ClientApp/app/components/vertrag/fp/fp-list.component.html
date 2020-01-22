@@ -1,0 +1,208 @@
+﻿<div class="panel panel-default" *ngFor="let vp of vpList">
+    <!-- Vp Edit -->
+    <div class="panel-heading" *ngIf="vpUpdate?.id == vp.id">
+        <div class="row">
+            <div class="col-xs-10 col-md-4">
+                Versicherte Person ({{vp.id}}) - {{vp.vorname}} {{vp.nachname}}
+            </div>
+            <div class="col-xs-2 col-md-2">
+                <button type="button" class="btn btn-primary btn-xs" title="versicherte Person BEARBEITEN..." (click)="onUpdate(vp)" [disabled]="vpUpdate"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-xs" title="versicherte Person LÖSCHEN..." (click)="onDelete(vp)" [disabled]="vpUpdate"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="vpUpdate?.id == vp.id">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Anrede / Titel -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpAnrede" class="col-md-3 control-label">Anrede/Titel:</label>
+                        <!-- Anrede -->
+                        <div class="col-md-4">
+                            <select id="vnAnrede" name="vnAnrede" class="form-control" aria-label="Anrede" [(ngModel)]="vp.anrede">
+                                <option [value]="0">Anrede</option>
+                                <option [value]="1">Herr</option>
+                                <option [value]="2">Frau</option>
+                                <option [value]="3">Familie</option>
+                                <option [value]="4">Firma</option>
+                            </select>
+                        </div>
+                        <!-- Titel -->
+                        <div class="col-md-5">
+                            <input type="text" id="vpTitel" name="vpTitel" class="form-control" placeholder="Titel" aria-label="Titel" [(ngModel)]="vp.titel" />
+                        </div>
+                    </div>
+                    <!-- Vorname -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpVorname" class="col-md-3 control-label">Vorname:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpVorname" name="vpVorname" class="form-control" [ngClass]="{required:modus == 'angebot' || modus == 'antrag'}" placeholder="Vorname" aria-label="Vorname" [(ngModel)]="vp.vorname" />
+                        </div>
+                    </div>
+                    <!-- Nachname -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpNachname" class="col-md-3 control-label">Nachname:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpNachname" name="vpNachname" class="form-control" [ngClass]="{required:modus == 'angebot' || modus == 'antrag'}" placeholder="Nachname" aria-label="Nachname" [(ngModel)]="vp.nachname" />
+                        </div>
+                    </div>
+                    <!-- Geburtsdatum -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpGebDatum" class="col-md-3 control-label">Geburtsdatum:</label>
+                        <div class="col-md-9">
+                            <input type="date" id="vpGebDatum" name="vpGebDatum" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Geburtsdatum" aria-label="Geburtsdatum" [(ngModel)]="vp.geburtsdatum" #vpGebDatum="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" useValueAsDate />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Strasse / Nr -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpStrasseNr" class="col-md-3 control-label">Straße/Nr.:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpStrasseNr" name="vpStrasseNr" class="form-control" [ngClass]="{required:modus == 'antrag'}" placeholder="Straße/Nr." aria-label="Straße/Nr." [(ngModel)]="vp.adresse.strasseNr" />
+                        </div>
+                    </div>
+                    <!-- PLZ/Ort -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpPlz" class="col-md-3 control-label">PLZ/Ort:</label>
+                        <!-- PLZ -->
+                        <div class="col-md-3">
+                            <input type="text" id="vpPlz" name="vpPlz" class="form-control" [ngClass]="{required:modus == 'antrag'}" placeholder="PLZ" aria-label="Plz" [(ngModel)]="vp.adresse.plz" />
+                        </div>
+                        <!-- Ort -->
+                        <div class="col-md-6">
+                            <input type="text" id="vpOrt" name="vpOrt" class="form-control" [ngClass]="{required:modus == 'antrag'}" placeholder="Ort" aria-label="Ort" [(ngModel)]="vp.adresse.ort" />
+                        </div>
+                    </div>
+                    <!-- Familienstand -->
+                    <div class="form-group form-group-sm" *ngIf="(isEnabledPFp || isEnabledPKv)">
+                        <label for="vpFamilienstandLedig" class="col-md-3 control-label">Familienstand:</label>
+                        <div class="col-md-9">
+                            <label class="radio-inline">
+                                <input type="radio" id="vpFamilienstandLedig" name="vpFamilienstand" [value]="1" [(ngModel)]="vp.familienstand" /> ledig
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="vpFamilienstandVerheiratet" name="vpFamilienstand" [value]="2" [(ngModel)]="vp.familienstand" /> verheiratet
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="vpFamilienstandGeschieden" name="vpFamilienstand" [value]="3" [(ngModel)]="vp.familienstand" /> geschieden
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="vpFamilienstandVerwitwet" name="vpFamilienstand" [value]="4" [(ngModel)]="vp.familienstand" /> verwitwet
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="vpFamilienstandLebensgemeinschaft" name="vpFamilienstand" [value]="5" [(ngModel)]="vp.familienstand" /> Lebensgemeinschaft
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Tel -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpTel" class="col-md-3 control-label">Telefon:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpTel" name="vpTel" class="form-control" placeholder="Tel" aria-label="Tel" [(ngModel)]="vp.kontakt.tel" />
+                        </div>
+                    </div>
+                    <!-- Mobil -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpMobil" class="col-md-3 control-label">Mobil:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpMobil" name="vpMobil" class="form-control" placeholder="Mobil" aria-label="Mobil" [(ngModel)]="vp.kontakt.mobil" />
+                        </div>
+                    </div>
+                    <!-- EMail -->
+                    <div class="form-group form-group-sm">
+                        <label for="vpEmail" class="col-md-3 control-label">E-Mail:</label>
+                        <div class="col-md-9">
+                            <input type="text" id="vpEmail" name="vpEmail" class="form-control" placeholder="E-Mail" aria-label="E-Mail" [(ngModel)]="vp.kontakt.email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-3 col-lg-offset-9">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" (click)="hideVpUpdate()">Abbrechen</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success" (click)="updateVp(vp)" data-style="expand-left">Übernehmen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vp View -->
+    <div class="panel-heading" *ngIf="vpUpdate?.id != vp.id">
+        <div class="row">
+            <div class="col-xs-10 col-md-4">
+                Versicherte Person ({{vp.id}}) - {{vp.vorname}} {{vp.nachname}}
+            </div>
+            <div class="col-xs-2 col-md-2">
+                <button type="button" class="btn btn-primary btn-xs" title="versicherte Person BEARBEITEN..." (click)="onUpdate(vp)" [disabled]="vpUpdate"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-xs" title="versicherte Person LÖSCHEN..." (click)="onDelete(vp)" [disabled]="vpUpdate"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="vpUpdate?.id != vp.id">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Anrede/Titel:</dt>
+                    <dd [ngSwitch]="vp?.anrede">
+                        <span class="label label-default" *ngSwitchCase="0">nichts ausgewählt</span>
+                        <span class="label label-default" *ngSwitchCase="1">Herr</span>
+                        <span class="label label-default" *ngSwitchCase="2">Frau</span>
+                        <span class="label label-default" *ngSwitchCase="3">Familie</span>
+                        <span class="label label-default" *ngSwitchCase="4">Firma</span> {{vp.titel}}
+                    </dd>
+                    <dt>Vorname:</dt>
+                    <dd>{{vp.vorname}}</dd>
+                    <dt>Nachname:</dt>
+                    <dd>{{vp.nachname}}</dd>
+                    <dt>Geburtsdatum:</dt>
+                    <dd>{{vp.geburtsdatum | date:'dd.MM.yyyy'}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Straße/Nr.:</dt>
+                    <dd>{{vp.adresse.strasseNr}}</dd>
+                    <dt>Plz/Ort:</dt>
+                    <dd>{{vp.adresse.plz}} {{vp.adresse.ort}}</dd>
+                    <dt *ngIf="(isEnabledPFp || isEnabledPKv)">Familienstand:</dt>
+                    <dd *ngIf="(isEnabledPFp || isEnabledPKv)" [ngSwitch]="vp.familienstand">
+                        <span class="label label-default" *ngSwitchCase="1">ledig</span>
+                        <span class="label label-default" *ngSwitchCase="2">verheiratet</span>
+                        <span class="label label-default" *ngSwitchCase="3">geschieden</span>
+                        <span class="label label-default" *ngSwitchCase="4">verwitwet</span>
+                        <span class="label label-default" *ngSwitchCase="5">Lebensgemeinschaft</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Tel:</dt>
+                    <dd>{{vp.kontakt.tel}}</dd>
+                    <dt>Mobil:</dt>
+                    <dd>{{vp.kontakt.mobil}}</dd>
+                    <dt>E-Mail:</dt>
+                    <dd>{{vp.kontakt.email}}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr />
+        <!-- Produkte -->
+        <!-- Fp -->
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-custom-fp btn-sm btn-block" title="FamilyPlus"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Family Plus</button>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

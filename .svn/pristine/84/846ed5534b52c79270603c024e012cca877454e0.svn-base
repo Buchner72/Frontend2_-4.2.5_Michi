@@ -1,0 +1,302 @@
+﻿@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+        padding-top: 50px;
+    }
+}
+
+body {
+    margin: 120px 0 300px 0;
+    overflow-y: scroll;
+}
+
+.required {
+    border-color: #e2071d;
+    outline: 0;
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 0, 0, .6);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 0, 0, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 0, 0, .6);
+}
+
+
+/*eigene Button*/
+/*Button FamilyPlus*/
+.btn-custom-fp {
+    background-color: #f9a51b;
+    border-color: #f9a51b;
+    color: #FFFFFF;
+}
+
+    .btn-custom-fp:hover, .btn-custom-fp:focus, .btn-custom-fp:active, .btn-custom-fp.active, .open .dropdown-toggle.btn-custom-fp {
+        background-color: #f49a06;
+        border-color: #db8a06;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-fp:active, .btn-custom-fp.active, .open .dropdown-toggle.btn-custom-fp {
+        background-image: none;
+    }
+
+        .btn-custom-fp.disabled button, .btn-custom-fp[disabled] button, fieldset[disabled] .btn-custom-fp, .btn-custom-fp.disabled:hover button, .btn-custom-fp[disabled]:hover button, fieldset[disabled] .btn-custom-fp:hover, .btn-custom-fp.disabled:focus button, .btn-custom-fp[disabled]:focus button, fieldset[disabled] .btn-custom-fp:focus button, .btn-custom-fp.disabled:active button, .btn-custom-fp[disabled]:active button, fieldset[disabled] .btn-custom-fp:active, .btn-custom-fp.disabled.active, .btn-custom-fp.active[disabled] button, fieldset[disabled] .btn-custom-fp.active {
+            background-color: #f9a51b;
+            border-color: #f9a51b;
+        }
+/*Button Unfallsonderklasse*/
+.btn-custom-us {
+    background-color: #f9a51b;
+    border-color: #f9a51b;
+    color: #FFFFFF;
+}
+
+    .btn-custom-us:hover, .btn-custom-us:focus, .btn-custom-us:active, .btn-custom-us.active, .open .dropdown-toggle.btn-custom-us {
+        background-color: #f49a06;
+        border-color: #db8a06;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-us:active, .btn-custom-us.active, .open .dropdown-toggle.btn-custom-us {
+        background-image: none;
+    }
+
+        .btn-custom-us.disabled, .btn-custom-us[disabled] button, fieldset[disabled] .btn-custom-us, .btn-custom-us.disabled:hover, .btn-custom-us[disabled]:hover button, fieldset[disabled] .btn-custom-us:hover, .btn-custom-us.disabled:focus, .btn-custom-us[disabled]:focus button, fieldset[disabled] .btn-custom-us:focus, .btn-custom-us.disabled:active, .btn-custom-us[disabled]:active button, fieldset[disabled] .btn-custom-us:active, .btn-custom-us.disabled.active, .btn-custom-us.active[disabled] button, fieldset[disabled] .btn-custom-us.active {
+            background-color: #f9a51b;
+            border-color: #f9a51b;
+        }
+/*Button Sonderklasse*/
+.btn-custom-soe {
+    background-color: #f9a51b;
+    border-color: #f9a51b;
+    color: #FFFFFF;
+}
+
+    .btn-custom-soe:hover, .btn-custom-soe:focus, .btn-custom-soe:active, .btn-custom-soe.active, .open .dropdown-toggle.btn-custom-soe {
+        background-color: #f49a06;
+        border-color: #db8a06;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-soe:active, .btn-custom-soe.active, .open .dropdown-toggle.btn-custom-soe {
+        background-image: none;
+    }
+
+        .btn-custom-soe.disabled, .btn-custom-soe[disabled] button, fieldset[disabled] .btn-custom-soe, .btn-custom-soe.disabled:hover, .btn-custom-soe[disabled]:hover button, fieldset[disabled] .btn-custom-soe:hover, .btn-custom-soe.disabled:focus, .btn-custom-soe[disabled]:focus button, fieldset[disabled] .btn-custom-soe:focus, .btn-custom-soe.disabled:active, .btn-custom-soe[disabled]:active button, fieldset[disabled] .btn-custom-soe:active, .btn-custom-soe.disabled.active, .btn-custom-soe.active[disabled] button, fieldset[disabled] .btn-custom-soe.active {
+            background-color: #f9a51b;
+            border-color: #f9a51b;
+        }
+/*Button Wahlarzt*/
+.btn-custom-wa {
+    background-color: #083e89;
+    border-color: #083e89;
+    color: #FFFFFF;
+}
+
+    .btn-custom-wa:hover, .btn-custom-wa:focus, .btn-custom-wa:active, .btn-custom-wa.active, .open .dropdown-toggle.btn-custom-wa {
+        background-color: #073371;
+        border-color: #052859;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-wa:active, .btn-custom-wa.active, .open .dropdown-toggle.btn-custom-wa {
+        background-image: none;
+    }
+
+        .btn-custom-wa.disabled, .btn-custom-wa[disabled] button, fieldset[disabled] .btn-custom-wa, .btn-custom-wa.disabled:hover, .btn-custom-wa[disabled]:hover button, fieldset[disabled] .btn-custom-wa:hover, .btn-custom-wa.disabled:focus button, .btn-custom-wa[disabled]:focus button, fieldset[disabled] .btn-custom-wa:focus, .btn-custom-wa.disabled:active button, .btn-custom-wa[disabled]:active button, fieldset[disabled] .btn-custom-wa:active, .btn-custom-wa.disabled.active, .btn-custom-wa.active[disabled] button, fieldset[disabled] .btn-custom-wa.active {
+            background-color: #083e89;
+            border-color: #083e89;
+        }
+/*Button Tagegeld*/
+.btn-custom-mt {
+    background-color: #083e89;
+    border-color: #083e89;
+    color: #FFFFFF;
+}
+
+    .btn-custom-mt:hover, .btn-custom-mt:focus, .btn-custom-mt:active, .btn-custom-mt.active, .open .dropdown-toggle.btn-custom-mt {
+        background-color: #073371;
+        border-color: #052859;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-mt:active, .btn-custom-mt.active, .open .dropdown-toggle.btn-custom-mt {
+        background-image: none;
+    }
+
+        .btn-custom-mt.disabled, .btn-custom-mt[disabled] button, fieldset[disabled] .btn-custom-mt, .btn-custom-mt.disabled:hover, .btn-custom-mt[disabled]:hover button, fieldset[disabled] .btn-custom-mt:hover, .btn-custom-mt.disabled:focus, .btn-custom-mt[disabled]:focus button, fieldset[disabled] .btn-custom-mt:focus, .btn-custom-mt.disabled:active, .btn-custom-mt[disabled]:active button, fieldset[disabled] .btn-custom-mt:active, .btn-custom-mt.disabled.active, .btn-custom-mt.active[disabled] button, fieldset[disabled] .btn-custom-mt.active {
+            background-color: #083e89;
+            border-color: #083e89;
+        }
+/*Button Pflegegeld*/
+.btn-custom-pfe {
+    background-color: #007049;
+    border-color: #007049;
+    color: #FFFFFF;
+}
+
+    .btn-custom-pfe:hover, .btn-custom-pfe:focus, .btn-custom-pfe:active, .btn-custom-pfe.active, .open .dropdown-toggle.btn-custom-pfe {
+        background-color: #005738;
+        border-color: #003d28;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-pfe:active, .btn-custom-pfe.active, .open .dropdown-toggle.btn-custom-pfe {
+        background-image: none;
+    }
+
+        .btn-custom-pfe.disabled, .btn-custom-pfe[disabled] button, fieldset[disabled] .btn-custom-pfe, .btn-custom-pfe.disabled:hover, .btn-custom-pfe[disabled]:hover button, fieldset[disabled] .btn-custom-pfe:hover, .btn-custom-pfe.disabled:focus, .btn-custom-pfe[disabled]:focus button, fieldset[disabled] .btn-custom-pfe:focus, .btn-custom-pfe.disabled:active, .btn-custom-pfe[disabled]:active button, fieldset[disabled] .btn-custom-pfe:active, .btn-custom-pfe.disabled.active, .btn-custom-pfe.active[disabled] button, fieldset[disabled] .btn-custom-pfe.active {
+            background-color: #007049;
+            border-color: #007049;
+        }
+/*Button Unfall*/
+.btn-custom-u {
+    background-color: #eecc74;
+    border-color: #eecc74;
+    color: #FFFFFF;
+}
+
+    .btn-custom-u:hover, .btn-custom-u:focus, .btn-custom-u:active, .btn-custom-u.active, .open .dropdown-toggle.btn-custom-u {
+        background-color: #ebc45d;
+        border-color: #e8bb47;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-u:active, .btn-custom-u.active, .open .dropdown-toggle.btn-custom-u {
+        background-image: none;
+    }
+
+        .btn-custom-u.disabled, .btn-custom-u[disabled] button, fieldset[disabled] .btn-custom-u, .btn-custom-u.disabled:hover, .btn-custom-u[disabled]:hover button, fieldset[disabled] .btn-custom-u:hover, .btn-custom-u.disabled:focus, .btn-custom-u[disabled]:focus button, fieldset[disabled] .btn-custom-u:focus, .btn-custom-u.disabled:active, .btn-custom-u[disabled]:active button, fieldset[disabled] .btn-custom-u:active, .btn-custom-u.disabled.active, .btn-custom-u.active[disabled] button, fieldset[disabled] .btn-custom-u.active {
+            background-color: #eecc74;
+            border-color: #eecc74;
+        }
+/*Button UnfallKinder*/
+.btn-custom-uk {
+    background-color: #eecc74;
+    border-color: #eecc74;
+    color: #FFFFFF;
+}
+
+    .btn-custom-uk:hover, .btn-custom-uk:focus, .btn-custom-uk:active, .btn-custom-uk.active, .open .dropdown-toggle.btn-custom-uk {
+        background-color: #ebc45d;
+        border-color: #e8bb47;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-uk:active, .btn-custom-uk.active, .open .dropdown-toggle.btn-custom-uk {
+        background-image: none;
+    }
+
+        .btn-custom-uk.disabled, .btn-custom-uk[disabled] button, fieldset[disabled] .btn-custom-uk, .btn-custom-uk.disabled:hover, .btn-custom-uk[disabled]:hover button, fieldset[disabled] .btn-custom-uk:hover, .btn-custom-uk.disabled:focus, .btn-custom-uk[disabled]:focus button, fieldset[disabled] .btn-custom-uk:focus, .btn-custom-uk.disabled:active, .btn-custom-uk[disabled]:active button, fieldset[disabled] .btn-custom-uk:active, .btn-custom-uk.disabled.active, .btn-custom-uk.active[disabled] button, fieldset[disabled] .btn-custom-uk.active {
+            background-color: #eecc74;
+            border-color: #eecc74;
+        }
+/*Button Mobil*/
+.btn-custom-mobil {
+    background-color: #006a71;
+    border-color: #006a71;
+    color: #FFFFFF;
+}
+
+    .btn-custom-mobil:hover, .btn-custom-mobil:focus, .btn-custom-mobil:active, .btn-custom-mobil.active, .open .dropdown-toggle.btn-custom-mobil {
+        background-color: #005258;
+        border-color: #003a3e;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-mobil:active, .btn-custom-mobil.active, .open .dropdown-toggle.btn-custom-mobil {
+        background-image: none;
+    }
+
+        .btn-custom-mobil.disabled, .btn-custom-mobil[disabled] button, fieldset[disabled] .btn-custom-mobil, .btn-custom-mobil.disabled:hover button, .btn-custom-mobil[disabled]:hover button, fieldset[disabled] .btn-custom-mobil:hover, .btn-custom-mobil.disabled:focus button, .btn-custom-mobil[disabled]:focus button, fieldset[disabled] .btn-custom-mobil:focus, .btn-custom-mobil.disabled:active, .btn-custom-mobil[disabled]:active button, fieldset[disabled] .btn-custom-mobil:active, .btn-custom-mobil.disabled.active, .btn-custom-mobil.active[disabled] button, fieldset[disabled] .btn-custom-mobil.active {
+            background-color: #006a71;
+            border-color: #006a71;
+        }
+/*Button immobilie*/
+.btn-custom-immobilie {
+    background-color: #8a2528;
+    border-color: #8a2528;
+    color: #FFFFFF;
+}
+
+    .btn-custom-immobilie:hover, .btn-custom-immobilie:focus, .btn-custom-immobilie:active, .btn-custom-immobilie.active, .open .dropdown-toggle.btn-custom-immobilie {
+        background-color: #5c1c1e;
+        border-color: #4a1113;
+        color: #FFFFFF;
+    }
+
+    .btn-custom-immobilie:active, .btn-custom-immobilie.active, .open .dropdown-toggle.btn-custom-immobilie {
+        background-image: none;
+    }
+
+        .btn-custom-immobilie.disabled, .btn-custom-immobilie[disabled] button, fieldset[disabled] .btn-custom-immobilie, .btn-custom-immobilie.disabled:hover, .btn-custom-immobilie[disabled]:hover button, fieldset[disabled] .btn-custom-immobilie:hover, .btn-custom-immobilie.disabled:focus, .btn-custom-immobilie[disabled]:focus button, fieldset[disabled] .btn-custom-immobilie:focus, .btn-custom-immobilie.disabled:active, .btn-custom-immobilie[disabled]:active button, fieldset[disabled] .btn-custom-immobilie:active, .btn-custom-immobilie.disabled.active, .btn-custom-immobilie.active[disabled] button, fieldset[disabled] .btn-custom-immobilie.active {
+            background-color: #006a71;
+            border-color: #006a71;
+        }
+/* footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #e2071d;
+    z-index: 1030;
+}
+
+    .footer > .container {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+        .footer > .container .text-muted {
+            margin: 20px 0;
+            color: #fff;
+        }
+/* nav menu */
+.navbar {
+    min-height: 100px;
+}
+
+.navbar-default {
+    background-image: none;
+    background-color: #e2071d;
+    border-color: #e7e7e7;
+}
+
+    .navbar-default .navbar-nav > li > a {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        line-height: 35px;
+        color: #fff;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #B8E1F6;
+        }
+
+    .navbar-default .navbar-nav > li.link-active a,
+    .navbar-default .navbar-nav > li.link-active a:hover,
+    .navbar-default .navbar-nav > li.link-active a:focus {
+        color: #B8E1F6;
+    }
+
+.navbar-brand {
+    padding: 10px 10px;
+    margin-left: -5px;
+    margin-top: 2px;
+}
+
+.navbar-nav {
+    float: left;
+    margin: 20px 0 0 0;
+}
+
+.navbar-toggle {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+li .glyphicon {
+    margin-right: 10px;
+}

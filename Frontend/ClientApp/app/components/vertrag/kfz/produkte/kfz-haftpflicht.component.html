@@ -1,0 +1,645 @@
+﻿<div class="row">
+    <div class="col-sm-2">
+        <button type="button" class="btn btn-custom-mobil btn-sm btn-block" title="Haftpflicht" (click)="onToggle(kfz)" [ngClass]="{active: kfz.produkte.hasHaftpflicht}" [disabled]="kfz.hasErrorHaftpflicht_VnAlter23_VnProbefuehrerschein || kfz.hasErrorHaftpflicht_VnAlter23_KfzLeistung || kfz.hasErrorHaftpflicht_KfzMarke">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Haftpflicht
+        </button>
+    </div>
+    <div class="col-sm-8">
+        <!-- Info -->
+        <div class="row">
+            <!-- Alles Ok -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasHaftpflicht && (!kfz.hasErrorHaftpflicht_VnAlter23_VnProbefuehrerschein && !kfz.hasErrorHaftpflicht_VnAlter23_KfzLeistung && !kfz.hasErrorHaftpflicht_KfzMarke)">
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Ihre Vorteile</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            <!--Pkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Pkw'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Zweitwagenregelung
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Versicherungssumme € 20 Millionen
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    muki 24h-Nothilfe
+                                </dd>
+                            </dl>
+                            <!--Lkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Lkw'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    kein Zuschlag für Minivans!
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Erweiterter Freischaden!
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    EURO-Lenkerhaftpflicht für Mietwagen!
+                                </dd>
+                            </dl>
+                            <!--Motorrad-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Motorrad'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Prämienvorteil durch jährliche Bonusstufenanpassung!
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Versicherungssumme € 10 Millionen!
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Bonusübernahme auf 3 Jahre!
+                                </dd>
+                            </dl>
+                            <!--Moped-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Moped'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    muki 24h-Nothilfe! (nur bei € 15 Millionen Versicherungssumme)
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Versicherungssumme bis zu € 15 Millionen!
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                            <!--Dreirad-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Dreirad'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                            <!--VierradKl50-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'VierradKl50'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                            <!--VierradGr50-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'VierradGr50'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                            <!--Zugmaschine-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Zugmaschine'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                            <!--Anhaenger-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Anhaenger'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung!
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fehler -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasHaftpflicht && (kfz.hasErrorHaftpflicht_KfzMarke)">
+                <div class="alert alert-warning">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Hinweis!</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            Eine Haftpflichtversicherung kann
+                            <!--Pkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Pkw'">
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorHaftpflicht_KfzMarke">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorHaftpflicht_KfzMarke">
+                                    für BMW I3/I4/I5/I8 nicht abgeschlossen werden!
+                                </dd>
+                            </dl>
+                            <!--Lkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Lkw'">
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorHaftpflicht_KfzMarke">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorHaftpflicht_KfzMarke">
+                                    für BMW I3/I4/I5/I8 nicht abgeschlossen werden!
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produkt Edit -->
+        <div class="row" *ngIf="kfz.produkte.hasHaftpflicht && kfzHaftpflicht != null">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info form-horizontal">
+                            <h4>Haftpflicht</h4>
+                            <hr style="margin-top:5px !important; margin-bottom:5px !important" />
+                            <!-- Tarif -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <label for="hpTarif" class="col-md-4 control-label">Tarif:</label>
+                                <div class="col-md-5">
+                                    <select id="hpTarif" name="hpTarif" class="form-control" aria-label="Tarif" [(ngModel)]="kfzHaftpflicht.produkte.haftpflicht.tarif">
+                                        <option [value]="0" disabled hidden>Tarif</option>
+                                        <option [value]="1">Standard (kein Freischaden)</option>
+                                        <option [value]="2">Premium (unbegrenzte Freischäden)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Versicherungssumme -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger'">
+                                <!-- Pkw / Lkw -->
+                                <label for="hpVersSum" class="col-md-4 control-label">Versicherungssumme:</label>
+                                <div class="col-sm-8">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzHaftpflicht.produkte.haftpflicht.versSum = 1" [ngClass]="{active: kfzHaftpflicht.produkte.haftpflicht.versSum == 1}" [disabled]="kfzHaftpflicht.typ == 'Pkw' || kfzHaftpflicht.typ == 'Lkw'">
+                                            10 Mio. €
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzHaftpflicht.produkte.haftpflicht.versSum = 2" [ngClass]="{active: kfzHaftpflicht.produkte.haftpflicht.versSum == 2}" [disabled]="kfzHaftpflicht.typ == 'Pkw' || kfzHaftpflicht.typ == 'Lkw' || kfzHaftpflicht.typ == 'Motorrad'">
+                                            15 Mio. €
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzHaftpflicht.produkte.haftpflicht.versSum = 3" [ngClass]="{active: kfzHaftpflicht.produkte.haftpflicht.versSum == 3}" [disabled]="kfzHaftpflicht.typ == 'Motorrad' || kfzHaftpflicht.typ == 'Moped' || kfzHaftpflicht.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger'">
+                                            20 Mio. €
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Variante B - (Ersatzfahrzeug) -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw'">
+                                <!-- Pkw -->
+                                <label for="hpVariante" class="col-md-4 control-label">Variante:</label>
+                                <div class="col-md-5">
+                                    <select id="hpVariante" name="hpVariante" class="form-control" aria-label="Variante" [(ngModel)]="kfzHaftpflicht.produkte.haftpflicht.variante">
+                                        <option [value]="0" disabled hidden>Variante</option>
+                                        <option [value]="1">A (ohne Ersatzfahrzeug)</option>
+                                        <option [value]="2">B (mit Ersatzfahrzeug)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Assistance -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <div class="col-md-8 col-sm-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="hpHasAssistance" name="hpHasAssistance" [(ngModel)]="kfzHaftpflicht.produkte.haftpflicht.hasAssistance" /> Assistance
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top:5px !important; margin-bottom:10px !important" />
+                            <div class="row">
+                                <div class="col-sm-3 col-sm-offset-9">
+                                    <button type="button" class="btn btn-danger btn-xs" title="Haftpflicht ABBRECHEN..." (click)="onCancel()">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs" title="Haftpflicht SPEICHERN..." (click)="onOk(kfzHaftpflicht)">
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produkt View -->
+        <div class="row" *ngIf="kfz.produkte.hasHaftpflicht && kfzHaftpflicht == null">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info">
+                            <h4>Haftpflicht</h4>
+                            <hr style="margin-top:5px !important; margin-bottom:5px !important" />
+                            <dl class="dl-horizontal">
+                                <!-- Tarif -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">Tarif:</dt>
+                                <dd style="margin-left:180px !important" [ngSwitch]="kfz.produkte.haftpflicht.tarif" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                    <span class="label label-primary" *ngSwitchCase="1">Standard (kein Freischaden)</span>
+                                    <span class="label label-primary" *ngSwitchCase="2">Premium (unbegrenzte Freischäden)</span>
+                                </dd>
+                                <!-- Versicherungssumme -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger'">Versicherungssumme:</dt>
+                                <dd style="margin-left:180px !important" [ngSwitch]="kfz.produkte.haftpflicht.versSum" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger'">
+                                    <span class="label label-primary" *ngSwitchCase="1">10 Mil. €</span>
+                                    <span class="label label-primary" *ngSwitchCase="2">15 Mil. €</span>
+                                    <span class="label label-primary" *ngSwitchCase="3">20 Mil. €</span>
+                                </dd>
+                                <!-- Variante -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw'">Variante:</dt>
+                                <dd style="margin-left:180px !important" [ngSwitch]="kfz.produkte.haftpflicht.variante" *ngIf="kfz.typ == 'Pkw'">
+                                    <span class="label label-primary" *ngSwitchCase="1">A - ohne Ersatzfahrzeug</span>
+                                    <span class="label label-primary" *ngSwitchCase="2">B - mit Ersatzfahrzeug</span>
+                                </dd>
+                                <!-- Assistance -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">Assistance:</dt>
+                                <dd style="margin-left:180px !important" [ngSwitch]="kfz.produkte.haftpflicht.hasAssistance" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                    <span class="label label-primary" *ngSwitchCase="true">Ja</span>
+                                    <span class="label label-primary" *ngSwitchCase="false">Nein</span>
+                                </dd>
+                            </dl>
+                            <hr style="margin-top:5px !important; margin-bottom:10px !important" />
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <button type="button" class="btn btn-primary btn-xs" title="Haftpflicht BEARBEITEN..." (click)="onUpdate(kfz)" [disabled]="kfzHaftpflicht || isEdited">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <!--Pkw-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Pkw' && (vn.hasErrorVn_Alter23 || vn.hasErrorVn_Alter75)">
+                            <h4>Achtung!</h4>
+                            <p *ngIf="vn.hasErrorVn_Alter23">
+                                Bis zum vollendeten 23. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter23">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Freischadenbonus.
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Schadenersatzbeitrag von € 500,- im Schadenfall.
+                                </dd>
+                            </dl>
+
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Lkw-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Lkw' && (vn.hasErrorVn_Alter23 || vn.hasErrorVn_Alter75)">
+                            <h4>Achtung!</h4>
+                            <p *ngIf="vn.hasErrorVn_Alter23">
+                                Bis zum vollendeten 23. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter23">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Schadenersatzbeitrag von € 500,- im Schadenfall.
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Schadenersatzbeitrag von € 500,- im Schadenfall.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Motorrad-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Motorrad' && (vn.hasErrorVn_Alter23 || vn.hasErrorVn_Alter75)">
+                            <h4>Achtung!</h4>
+                            <p>
+                                Allgemein
+                            </p>
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Genereller Stilllegungsverzicht bei allen Krafträdern.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter23">
+                                Bis zum vollendeten 23. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter23">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter23">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter23">
+                                    Schadenersatzbeitrag von € 500,- im Schadenfall.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Moped-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Moped'">
+                            <h4>Achtung!</h4>
+                            <p>
+                                Allgemein
+                            </p>
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Genereller Stilllegungsverzicht bei allen Krafträdern.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Dreirad-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Dreirad' && (vn.hasErrorVn_Alter23 || vn.hasErrorVn_Alter75)">
+                            <h4>Achtung!</h4>
+                            <p *ngIf="vn.hasErrorVn_Alter23">
+                                Bis zum vollendeten 23. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter23">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter23">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter23">
+                                    Schadenersatzbeitrag von € 500,- im Schadenfall.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--VierradKl50-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'VierradKl50'">
+                            <h4>Achtung!</h4>
+                            <p>
+                                Allgemein
+                            </p>
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Genereller Stilllegungsverzicht bei allen Krafträdern.
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="!vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="!vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--VierradGr50-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'VierradGr50'">
+                            <h4>Achtung!</h4>
+                            <p>
+                                Allgemein
+                            </p>
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Genereller Stilllegungsverzicht bei allen Krafträdern.
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="!vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="!vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Zugmaschine-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Zugmaschine' && (vn.hasErrorVn_Alter75)">
+                            <h4>Achtung!</h4>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                        <!--Anhaenger-->
+                        <div class="alert alert-warning" *ngIf="kfz.typ == 'Anhaenger'">
+                            <h4>Achtung!</h4>
+                            <p>
+                                Allgemein
+                            </p>
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Annahme nur für Anhänger, die mit einem Pkw und Kombi gezogen werden können und gleichzeitig mit dem Zugfahrzeug (oder zusätzlich zu diesem) versichert werden.
+                                </dd>
+                            </dl>
+                            <p *ngIf="vn.hasErrorVn_Alter75">
+                                Ab dem vollendeten 75. Lebensjahr
+                            </p>
+                            <dl class="dl-horizontal" *ngIf="vn.hasErrorVn_Alter75">
+                                <dt style="width:30px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    <img src="../../../../../../wwwroot/img/checkmarkexclamation.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="vn.hasErrorVn_Alter75">
+                                    Anfragepflichtig.
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2" *ngIf="kfz.produkte.hasHaftpflicht">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Prämien -->
+                <table class="table table-condensed">
+                    <tr class="info">
+                        <td colspan="2">Intervall</td>
+                        <td>Prämie</td>
+                    </tr>
+                    <tr class="">
+                        <td>monatlich</td>
+                        <td>€</td>
+                        <td class="text-right">100,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>vierteljährlich</td>
+                        <td>€</td>
+                        <td class="text-right">300,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>halbjährlich</td>
+                        <td>€</td>
+                        <td class="text-right">600,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>jährlich</td>
+                        <td>€</td>
+                        <td class="text-right">1.200,00</td>
+                    </tr>
+                </table>
+                <!-- Steuern -->
+                <table class="table table-condensed" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                    <tr class="warning">
+                        <td colspan="2">Intervall</td>
+                        <td>Steuer</td>
+                    </tr>
+                    <tr class="">
+                        <td>monatlich</td>
+                        <td>€</td>
+                        <td class="text-right">10,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>vierteljährlich</td>
+                        <td>€</td>
+                        <td class="text-right">30,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>halbjährlich</td>
+                        <td>€</td>
+                        <td class="text-right">60,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>jährlich</td>
+                        <td>€</td>
+                        <td class="text-right">120,00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

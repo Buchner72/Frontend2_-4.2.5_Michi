@@ -1,0 +1,126 @@
+﻿<div class="row">
+    <div class="col-sm-2">
+        <button type="button" class="btn btn-custom-mobil btn-sm btn-block" title="Insassenunfall" (click)="onToggle(kfz)" [ngClass]="{active: kfz.produkte.hasInsassen}" [disabled]="!kfz.produkte.hasHaftpflicht">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Insassenunfall
+        </button>
+    </div>
+    <div class="col-sm-8">
+        <!-- Info -->
+        <div class="row">
+            <!-- Alles Ok -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasInsassen && (kfz.produkte.hasHaftpflicht)">
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Ihre Vorteile</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Höchstzeichnungslimit für Tod VS € 20.000,-
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Höchstzeichnungslimit für Invalidität VS € 40.000,-
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Pauschalsystem
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fehler -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasInsassen && (!kfz.produkte.hasHaftpflicht)">
+                <div class="alert alert-warning">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Hinweis!</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            Eine Insassenunfall kann
+                            <!--Pkw/Lkw/Motorrad/Moped/Dreirad/VierradKl50/VierradGr50/Zugmaschine/Anhaenger-->
+                            <dl class="dl-horizontal">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    nur gemeinsam mit einer Haftpflichtversicherung abgeschlossen werden!
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produkt View -->
+        <div class="row" *ngIf="kfz.produkte.hasInsassen == true">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info">
+                            <h4>Insassenunfall</h4>
+                            <hr style="margin-top:5px !important; margin-bottom:5px !important" />
+                            (keine weiteren Optionen!)
+                            <hr style="margin-top:5px !important; margin-bottom:10px !important" />
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <button type="button" class="btn btn-primary btn-xs" title="Insassenunfall BEARBEITEN..." disabled><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="alert alert-warning">
+                            Beschreibungen und Erklärungen...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2" *ngIf="kfz.produkte.hasInsassen">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Prämien -->
+                <table class="table table-condensed">
+                    <tr class="info">
+                        <td colspan="2">Intervall</td>
+                        <td>Prämie</td>
+                    </tr>
+                    <tr class="">
+                        <td>monatlich</td>
+                        <td>€</td>
+                        <td class="text-right">100,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>vierteljährlich</td>
+                        <td>€</td>
+                        <td class="text-right">300,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>halbjährlich</td>
+                        <td>€</td>
+                        <td class="text-right">600,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>jährlich</td>
+                        <td>€</td>
+                        <td class="text-right">1.200,00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

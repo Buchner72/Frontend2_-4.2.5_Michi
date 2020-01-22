@@ -1,0 +1,25 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPRs">
+    <div class="panel-heading" role="tab" id="headingPRs">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title"><span class="label label-default">R</span> Rechtsschutz</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="isPanelBodyPRs = !isPanelBodyPRs">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isPanelBodyPRs"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isPanelBodyPRs"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePRs" class="panel-collapse collapse" [ngClass]="{in: isPanelBodyPRs == true}" role="tabpanel" aria-labelledby="headingPRs">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary btn-xs" title="Versicherungsnehmer NEU..." (click)="showVnNew()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Rechtsschutz</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>

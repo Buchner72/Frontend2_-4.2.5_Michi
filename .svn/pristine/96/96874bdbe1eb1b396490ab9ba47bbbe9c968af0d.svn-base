@@ -1,0 +1,426 @@
+﻿<div class="row">
+    <div class="col-sm-2">
+        <button type="button" class="btn btn-custom-mobil btn-sm btn-block" title="Kasko" (click)="onToggle(kfz)" [ngClass]="{active: kfz.produkte.hasKasko}" [disabled]="!kfz.produkte.hasHaftpflicht || kfz.hasErrorKasko_KfzGesamtpreis || kfz.hasErrorKasko_KfzAlter8 || kfz.hasErrorKasko_KfzMarke">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Kasko
+        </button>
+    </div>
+    <div class="col-sm-8">
+        <!-- Info -->
+        <div class="row">
+            <!-- Alles Ok -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasKasko && (kfz.produkte.hasHaftpflicht && !kfz.hasErrorKasko_KfzGesamtpreis && !kfz.hasErrorKasko_KfzAlter8 && !kfz.hasErrorKasko_KfzMarke)">
+                <div class="alert alert-info">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Ihre Vorteile</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            <!--Pkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Pkw'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Sonderausstattung bis € 2.500,- prämienfrei
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Windschutzscheiben-Tausch bei Carglass
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung
+                                </dd>
+
+                                <!--<dt style="width:30px;"><img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" /></dt>
+                                <dd style="margin-left:40px;">Prompte Schadenserledigung in der Werkstätte Ihres Vertrauens</dd>
+
+                                <dt style="width:30px;"><img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" /></dt>
+                                <dd style="margin-left:40px;">Optimaler Deckungsumfang zu günstigen Prämien</dd>
+
+                                <dt style="width:30px;"><img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" /></dt>
+                                <dd style="margin-left:40px;">Prämiengarantie – Keine Rückstufung im Schadensfall</dd>
+
+                                <dt style="width:30px;"><img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" /></dt>
+                                <dd style="margin-left:40px;">Rückerstattung der unverbrauchten Prämie bei Verkauf</dd>
+
+                                <dt style="width:30px;"><img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" /></dt>
+                                <dd style="margin-left:40px;">Kaskoeinstufung gleich wie Haftpflichteinstufung</dd>-->
+                            </dl>
+                            <!--Lkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Lkw'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Sonderausstattung bis € 2.500,- prämienfrei
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Windschutzscheiben-Tausch bei Carglass
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung
+                                </dd>
+                            </dl>
+                            <!--Motorrad-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Motorrad'">
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Sonderausstattung bis € 1.500,- prämienfrei
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Prämiengarantie – Keine Rückstufung im Schadensfall
+                                </dd>
+
+                                <dt style="width:30px;">
+                                    <img src="../../../../../../wwwroot/img/checkmarkgreen.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;">
+                                    Kein Zuschlag bei monatlicher Zahlung
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fehler -->
+            <div class="col-sm-8" *ngIf="!kfz.produkte.hasKasko && (!kfz.produkte.hasHaftpflicht || kfz.hasErrorKasko_KfzGesamtpreis || kfz.hasErrorKasko_KfzAlter5 || kfz.hasErrorKasko_KfzAlter8 || kfz.hasErrorKasko_KfzMarke)">
+                <div class="alert alert-warning">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4>Hinweis!</h4>
+                        </div>
+                        <div class="col-sm-9">
+                            Eine Kaskoversicherung kann
+                            <!--PKW-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Pkw'">
+                                <dt style="width:30px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    nur gemeinsam mit einer Haftpflichtversicherung abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    nur für Fahrzeuge mit einem Geasmtpreis von kleiner € 100.000,-- abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    nur bis zu einem Höchstannahmealter von 5 Jahren abgeschlossen werden (Vollkasko)!<br />Teilkasko möglich.
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    nur bis zu einem Höchstannahmealter von 8 Jahren abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzMarke">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzMarke">
+                                    für BMW X6 nicht abgeschlossen werden!
+                                </dd>
+                            </dl>
+                            <!--Lkw-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Lkw'">
+                                <dt style="width:30px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    nur gemeinsam mit einer Haftpflichtversicherung abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    nur für Fahrzeuge mit einem Geasmtpreis von kleiner € 100.000,-- abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    nur bis zu einem Höchstannahmealter von 5 Jahren abgeschlossen werden (Vollkasko)!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    nur bis zu einem Höchstannahmealter von 8 Jahren abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzMarke">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzMarke">
+                                    für BMW X6 nicht abgeschlossen werden!
+                                </dd>
+                            </dl>
+                            <!--Motorrad-->
+                            <dl class="dl-horizontal" *ngIf="kfz.typ == 'Motorrad'">
+                                <dt style="width:30px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="!kfz.produkte.hasHaftpflicht">
+                                    nur gemeinsam mit einer Haftpflichtversicherung abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzGesamtpreis">
+                                    nur für Fahrzeuge mit einem Geasmtpreis von kleiner € 100.000,-- abgeschlossen werden!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter5">
+                                    nur bis zu einem Höchstannahmealter von 5 Jahren abgeschlossen werden (Vollkasko)!
+                                </dd>
+
+                                <dt style="width:30px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    <img src="../../../../../../wwwroot/img/checkmarkred.png" height="15" />
+                                </dt>
+                                <dd style="margin-left:40px;" *ngIf="kfz.hasErrorKasko_KfzAlter8">
+                                    nur bis zu einem Höchstannahmealter von 8 Jahren abgeschlossen werden!
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produkt Edit -->
+        <div class="row" *ngIf="kfz.produkte.hasKasko && kfzKasko != null">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info form-horizontal">
+                            <h4>Kasko</h4>
+                            <hr style="margin-top:5px !important; margin-bottom:5px !important" />
+                            <!-- Tarif -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad'">
+                                <!-- Pkw / Lkw / Motorrad -->
+                                <label for="kkTarif" class="col-md-4 control-label">Tarif: ({{kfz.hasErrorKasko_KfzAlter5}})</label>
+                                <div class="col-md-5">
+                                    <select id="kkTarif" name="kkTarif" class="form-control" aria-label="Tarif" [(ngModel)]="kfzKasko.produkte.kasko.tarif">
+                                        <option [value]="0" disabled hidden>Tarif</option>
+                                        <option [value]="1" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw')">Teilkasko Standard</option>
+                                        <option [value]="2" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw')">Teilkasko Premium</option>
+                                        <option [value]="3" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && !kfz.hasErrorKasko_KfzAlter5">Vollkasko Standard</option>
+                                        <option [value]="4" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && !kfz.hasErrorKasko_KfzAlter5">Vollkasko Premium</option>
+                                        <option [value]="5" *ngIf="kfz.typ == 'Motorrad'">Motorrad Teilkasko</option>
+                                        <option [value]="6" *ngIf="kfz.typ == 'Motorrad' && !kfz.hasErrorKasko_KfzAlter5">Motorrad Vollkasko</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Selbstbehalt -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <label for="kkSelbstbehalt" class="col-md-4 control-label">Selbstbehalt:</label>
+                                <div class="col-sm-8">
+                                    <div class="btn-group" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzKasko.produkte.kasko.selbstbehalt = 1" [ngClass]="{active: kfzKasko.produkte.kasko.selbstbehalt == 1}">320,00 €</button>
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzKasko.produkte.kasko.selbstbehalt = 2" [ngClass]="{active: kfzKasko.produkte.kasko.selbstbehalt == 2}">480,00 €</button>
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="kfzKasko.produkte.kasko.selbstbehalt = 3; kfzKasko.produkte.kasko.hasFifty = false" [ngClass]="{active: kfzKasko.produkte.kasko.selbstbehalt == 3}">880,00 €</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FiftyFiftyPackage -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw -->
+                                <div class="col-md-8 col-sm-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="kkHasFifty" name="hpHasAssistance" [(ngModel)]="kfzKasko.produkte.kasko.hasFifty" [disabled]="kfzKasko.produkte.kasko.selbstbehalt == 3" /> Fifty-Fifty Package
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- GAP -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <div class="col-md-8 col-sm-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="kkHasGap" name="kkHasGap" [(ngModel)]="kfzKasko.produkte.kasko.hasGap" [disabled]="kfzKasko.produkte.kasko.hasKnt" /> GAP Deckung
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- KNT -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <div class="col-md-8 col-sm-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="kkHasKnt" name="kkHasKnt" [(ngModel)]="kfzKasko.produkte.kasko.hasKnt" [disabled]="kfzKasko.produkte.kasko.hasGap" /> KNT Deckung
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Elektropaket -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <!-- Pkw / Lkw -->
+                                <div class="col-md-8 col-sm-offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="kkHasElektropaket" name="kkHasElektropaket" [(ngModel)]="kfzKasko.produkte.kasko.hasElektropaket" /> Elektro-Paket
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top:5px !important; margin-bottom:10px !important" />
+                            <div class="row">
+                                <div class="col-sm-3 col-sm-offset-9">
+                                    <button type="button" class="btn btn-danger btn-xs" title="Kasko ABBRECHEN..." (click)="onCancel()">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-xs" title="Kasko SPEICHERN..." (click)="onOk(kfzKasko)">
+                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produkt View -->
+        <div class="row" *ngIf="kfz.produkte.hasKasko && kfzKasko == null">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info">
+                            <h4>Kasko</h4>
+                            <hr style="margin-top:5px !important; margin-bottom:5px !important" />
+                            <dl class="dl-horizontal">
+                                <!-- Tarif -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad'">Tarif:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad'" [ngSwitch]="kfz.produkte.kasko.tarif">
+                                    <span class="label label-primary" *ngSwitchCase="1">Teilkasko Standard</span>
+                                    <span class="label label-primary" *ngSwitchCase="2">Teilkasko Premium</span>
+                                    <span class="label label-primary" *ngSwitchCase="3">Vollkasko Standard</span>
+                                    <span class="label label-primary" *ngSwitchCase="4">Vollkasko Premium</span>
+                                    <span class="label label-primary" *ngSwitchCase="5">Motorrad Vollkasko</span>
+                                    <span class="label label-primary" *ngSwitchCase="6">Motorrad Teilkasko</span>
+                                </dd>
+                                <!-- Selbstbehalt -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">Selbstbehalt:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'" [ngSwitch]="kfz.produkte.kasko.selbstbehalt">
+                                    <span class="label label-primary" *ngSwitchCase="1">320,00 €</span>
+                                    <span class="label label-primary" *ngSwitchCase="2">480,00 €</span>
+                                    <span class="label label-primary" *ngSwitchCase="3">880,00 €</span>
+                                </dd>
+                                <!-- FiftyFiftyPackage -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">Fifty-Fifty Package:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'" [ngSwitch]="kfz.produkte.kasko.hasFifty">
+                                    <span class="label label-primary" *ngSwitchCase="true">Ja</span>
+                                    <span class="label label-primary" *ngSwitchCase="false">Nein</span>
+                                </dd>
+                                <!-- GAP -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">GAP Deckung:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'" [ngSwitch]="kfz.produkte.kasko.hasGap">
+                                    <span class="label label-primary" *ngSwitchCase="true">Ja</span>
+                                    <span class="label label-primary" *ngSwitchCase="false">Nein</span>
+                                </dd>
+                                <!-- KNT -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">KNT Deckung:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'" [ngSwitch]="kfz.produkte.kasko.hasKnt">
+                                    <span class="label label-primary" *ngSwitchCase="true">Ja</span>
+                                    <span class="label label-primary" *ngSwitchCase="false">Nein</span>
+                                </dd>
+                                <!-- Elektropaket -->
+                                <dt style="width:160px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">Elektro-Paket:</dt>
+                                <dd style="margin-left:180px !important" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'" [ngSwitch]="kfz.produkte.kasko.hasElektropaket">
+                                    <span class="label label-primary" *ngSwitchCase="true">Ja</span>
+                                    <span class="label label-primary" *ngSwitchCase="false">Nein</span>
+                                </dd>
+                            </dl>
+                            <hr style="margin-top:5px !important; margin-bottom:10px !important" />
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-10">
+                                    <button type="button" class="btn btn-primary btn-xs" title="Kasko BEARBEITEN..." (click)="onUpdate(kfz)" [disabled]="kfzKasko || isEdited">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="alert alert-warning">
+                            Beschreibungen und Erklärungen...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2" *ngIf="kfz.produkte.hasKasko && kfzKasko == null">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Prämien -->
+                <table class="table table-condensed">
+                    <tr class="info">
+                        <td colspan="2">Intervall</td>
+                        <td>Prämie</td>
+                    </tr>
+                    <tr class="">
+                        <td>monatlich</td>
+                        <td>€</td>
+                        <td class="text-right">100,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>vierteljährlich</td>
+                        <td>€</td>
+                        <td class="text-right">300,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>halbjährlich</td>
+                        <td>€</td>
+                        <td class="text-right">600,00</td>
+                    </tr>
+                    <tr class="">
+                        <td>jährlich</td>
+                        <td>€</td>
+                        <td class="text-right">1.200,00</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

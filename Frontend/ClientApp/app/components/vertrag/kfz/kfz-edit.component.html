@@ -1,0 +1,761 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <span class="label label-default">{{kfz.typ}}</span> - {{kfz.marke}} {{kfz.modell}}
+            </div>
+            <div class="col-xs-12 col-md-1 col-md-offset-7">
+                <span class="label label-danger" *ngIf="(kfz.id != -1)">in Bearbeitung...</span>
+                <span class="label label-danger" *ngIf="(kfz.id == -1)">Neuanlage...</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" #formKfzEdit="ngForm">
+            <div class="row bg-info">
+                <div class="col-md-4">
+                    <!-- Vertrag -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" id="kfzVertrag_Neu" name="kfzVertrag" [value]="1" [(ngModel)]="kfz.vertrag" /> Neuvertrag
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="kfzVertrag_Wechsel" name="kfzVertrag" [value]="2" [(ngModel)]="kfz.vertrag" /> Fahrzeugwechsel
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="kfzVertrag_Ersatz" name="kfzVertrag" [value]="3" [(ngModel)]="kfz.vertrag" /> Ersatzantrag
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-5 col-md-3">
+                    <!-- Erstfahrzeug/Zweitfahrzeug -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <div class="col-md-12">
+                            <label class="radio-inline">
+                                <input type="radio" id="kfzRang_Erstfahrzeug" name="kfzRang" [value]="1" [(ngModel)]="kfz.fahrzeug" /> Erstfahrzeug
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="kfzRang_Zweitfahrzeug" name="kfzRang" [value]="2" [(ngModel)]="kfz.fahrzeug" /> Zweitfahrzeug
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-info">
+                <div class="col-md-3">
+                    <!-- Versicherungsbeginn -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzVersicherungsbeginn" class="col-md-5 control-label">Versicherungsbeginn:</label>
+                        <div class="col-md-7">
+                            <input type="date" id="kfzVersicherungsbeginn" name="kfzVersicherungsbeginn" class="form-control" placeholder="Versicherungsbeginn" aria-label="Versicherungsbeginn" #kfzVersicherungsbeginn="ngModel" [(ngModel)]="kfz.versicherungsbeginn" useValueAsDate />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <!-- Wunschhauptfälligkeit -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzWunschhauptfaelligkeit" class="col-md-5 control-label">Wunschhauptfälligkeit:</label>
+                        <div class="col-md-7">
+                            <select id="kfzWunschhauptfaelligkeit" name="kfzWunschhauptfaelligkeit" class="form-control" aria-label="Wunschhauptfälligkeit" [(ngModel)]="kfz.wunschhauptfaelligkeit">
+                                <!--funktioniert nur mit Wert String.empty für Wunschhauptfälligkeit-->
+                                <option value="" disabled selected hidden>Wunschhauptfälligkeit</option>
+                                <option [value]="'Jaenner'">Jänner</option>
+                                <option [value]="'Februar'">Februar</option>
+                                <option [value]="'Maerz'">März</option>
+                                <option [value]="'April'">April</option>
+                                <option [value]="'Mai'">Mai</option>
+                                <option [value]="'Juni'">Juni</option>
+                                <option [value]="'Juli'">Juli</option>
+                                <option [value]="'August'">August</option>
+                                <option [value]="'September'">September</option>
+                                <option [value]="'Oktober'">Oktober</option>
+                                <option [value]="'November'">November</option>
+                                <option [value]="'Dezember'">Dezember</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-1 col-md-4" *ngIf="kfz.fahrzeug == 2">
+                    <!-- Polizzennr -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzZweitfahrzeugPolNr" class="col-md-5 control-label">Polizzennr. Zweitfahrzeug:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzZweitfahrzeugPolNr" name="kfzZweitfahrzeugPolNr" class="form-control required" placeholder="Polizzennummer" aria-label="Polizzennummer" [(ngModel)]="kfz.polNr" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1em;">
+                <div class="col-md-3">
+                    <!-- Subtyp -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'VierradGr50'">
+                        <!-- 4RadGr50 -->
+                        <label for="kfzAntrieb" class="col-md-5 control-label">Subtyp:</label>
+                        <div class="col-md-7">
+                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" title="ATV/Quad" (click)="kfz.subtyp = 1" [ngClass]="{active: kfz.subtyp == 1}">
+                                        ATV/Quad
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" title="Mopedauto" (click)="kfz.subtyp = 2" [ngClass]="{active: kfz.subtyp == 2}">
+                                        Mopedauto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NationalCode/Marke&Modell/Manuell -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                        <!-- Pkw / Lkw -->
+                        <div class="col-md-12">
+                            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="setModusNatCode()" [ngClass]="{active: kfz.eingabeArt == 1}">
+                                        Nat-Code
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="setModusMarkeModell()" [ngClass]="{active: kfz.eingabeArt == 2}">
+                                        Marke/Modell
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" (click)="setModusManuell()" [ngClass]="{active: kfz.eingabeArt == 3}">
+                                        Manuell
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ### NationalCode/Marke&Modell -->
+                    <!-- Pkw / Lkw -->
+                    <eurotax [kfz]="kfz"></eurotax>
+
+                    <!-- ### Manuell -->
+                    <!-- Marke <Input> Manuell -->
+                    <div class="form-group form-group-sm bg-info" *ngIf="kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger'">
+                        <!-- Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzMarke" class="col-md-5 control-label">Marke:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzMarke" name="kfzMarke" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Marke" aria-label="Marke" [(ngModel)]="kfz.marke" #kfzMarke="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzMarke.invalid && (kfzMarke.dirty || kfzMarke.touched)">
+                                <span *ngIf="kfzMarke.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Marke <Select> Manuell -->
+                    <div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 3)">
+                        <!-- Pkw / Lkw -->
+                        <label for="kfzMarke" class="col-md-5 control-label">Marke:</label>
+                        <div class="col-md-7">
+                            <select id="kfzMarke" name="kfzMarke" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" aria-label="Marke" [(ngModel)]="kfz.marke" #kfzMarkeSelect="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null">
+                                <option value="" disabled selected hidden>Marke</option>
+                                <option [value]="'Abarth'">Abarth</option>
+                                <option [value]="'Alfa Romeo'">Alfa Romeo</option>
+                                <option [value]="'Aston Martin'">Aston Martin</option>
+                                <option [value]="'Audi'">Audi</option>
+                                <option [value]="'Bentley'">Bentley</option>
+                                <option [value]="'BMW'">BMW</option>
+                                <option [value]="'Bremach'">Bremach</option>
+                                <option [value]="'Bugatti'">Bugatti</option>
+                                <option [value]="'Cadillac'">Cadillac</option>
+                                <option [value]="'Caterham'">Caterham</option>
+                                <option [value]="'Chevrolet'">Chevrolet</option>
+                                <option [value]="'Chrysler'">Chrysler</option>
+                                <option [value]="'Citroën'">Citroën</option>
+                                <option [value]="'Corvette'">Corvette</option>
+                                <option [value]="'Dacia'">Dacia</option>
+                                <option [value]="'Daihatsu'">Daihatsu</option>
+                                <option [value]="'DFSK'">DFSK</option>
+                                <option [value]="'Dodge'">Dodge</option>
+                                <option [value]="'DS Automobiles'">DS Automobiles</option>
+                                <option [value]="'Ferrari'">Ferrari</option>
+                                <option [value]="'Fiat'">Fiat</option>
+                                <option [value]="'Fisker'">Fisker</option>
+                                <option [value]="'Ford'">Ford</option>
+                                <option [value]="'Honda'">Honda</option>
+                                <option [value]="'Hummer'">Hummer</option>
+                                <option [value]="'Hyundai'">Hyundai</option>
+                                <option [value]="'Infiniti'">Infiniti</option>
+                                <option [value]="'Isuzu'">Isuzu</option>
+                                <option [value]="'Iveco'">Iveco</option>
+                                <option [value]="'Jaguar'">Jaguar</option>
+                                <option [value]="'Jeep'">Jeep</option>
+                                <option [value]="'KIA'">KIA</option>
+                                <option [value]="'KTM'">KTM</option>
+                                <option [value]="'Lada'">Lada</option>
+                                <option [value]="'Lamborghini'">Lamborghini</option>
+                                <option [value]="'Lancia'">Lancia</option>
+                                <option [value]="'Land Rover'">Land Rover</option>
+                                <option [value]="'Lexus'">Lexus</option>
+                                <option [value]="'Lotus'">Lotus</option>
+                                <option [value]="'Mahindra'">Mahindra</option>
+                                <option [value]="'MAN'">MAN</option>
+                                <option [value]="'Maserati'">Maserati</option>
+                                <option [value]="'Maybach'">Maybach</option>
+                                <option [value]="'Mazda'">Mazda</option>
+                                <option [value]="'McLaren'">McLaren</option>
+                                <option [value]="'Mercedes-Benz'">Mercedes-Benz</option>
+                                <option [value]="'Mini'">Mini</option>
+                                <option [value]="'Mitsubishi'">Mitsubishi</option>
+                                <option [value]="'Morgan'">Morgan</option>
+                                <option [value]="'Nissan'">Nissan</option>
+                                <option [value]="'Opel'">Opel</option>
+                                <option [value]="'Peugeot'">Peugeot</option>
+                                <option [value]="'Piaggio'">Piaggio</option>
+                                <option [value]="'Porsche'">Porsche</option>
+                                <option [value]="'Proton'">Proton</option>
+                                <option [value]="'Renault'">Renault</option>
+                                <option [value]="'Rolls-Royce'">Rolls-Royce</option>
+                                <option [value]="'Saab'">Saab</option>
+                                <option [value]="'Santana'">Santana</option>
+                                <option [value]="'SCAM'">SCAM</option>
+                                <option [value]="'Seat'">Seat</option>
+                                <option [value]="'Skoda'">Skoda</option>
+                                <option [value]="'Smart'">Smart</option>
+                                <option [value]="'SsangYong'">SsangYong</option>
+                                <option [value]="'Subaru'">Subaru</option>
+                                <option [value]="'Suzuki'">Suzuki</option>
+                                <option [value]="'Tata'">Tata</option>
+                                <option [value]="'Tazzari'">Tazzari</option>
+                                <option [value]="'Tesla'">Tesla</option>
+                                <option [value]="'Think'">Think</option>
+                                <option [value]="'Toyota'">Toyota</option>
+                                <option [value]="'Volvo'">Volvo</option>
+                                <option [value]="'VW'">VW</option>
+                                <option [value]="'Wiesmann'">Wiesmann</option>
+                            </select>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzMarkeSelect.invalid && (kfzMarkeSelect.dirty || kfzMarkeSelect.touched)">
+                                <span *ngIf="kfzMarkeSelect.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modell/Typ <Input> Manuell -->
+                    <div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger') && (kfz.eingabeArt == 3 || kfz.eingabeArt == undefined)">
+                        <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+                        <label for="kfzModell" class="col-md-5 control-label">Modell/Typ:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzModell" name="kfzModell" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Modell/Typ" aria-label="Modell/Typ" [(ngModel)]="kfz.modell" #kfzModell="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzModell.invalid && (kfzModell.dirty || kfzModell.touched)">
+                                <span *ngIf="kfzModell.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Natcode -->
+                    <div class="form-group form-group-sm" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1 || kfz.eingabeArt == 2)">
+                        <!--Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+                        <label for="kfzNatcode" class="col-sm-5 control-label">NatCode:</label>
+                        <div class="col-sm-7">
+                            <input type="text" id="kfzNationalCode" name="kfzNationalCode" class="form-control" placeholder="NationalCode" aria-label="National Code" [(ngModel)]="kfz.nationalCode" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- Versicherungsbestätigung Nr. -->
+                    <div class="form-group form-group-sm">
+                        <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+                        <label for="kfzVbNr" class="col-md-5 control-label">VB Nr.:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzVbNr" name="kfzVbNr" class="form-control" [ngClass]="{required: modus == 'antrag'}" placeholder="Versicherungsbestätigung" aria-label="Versicherungsbestätigung" [(ngModel)]="kfz.vbnr" #kfzVbNr [required]="modus == 'antrag' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="modus != 'antrag' && (kfzVbNr.invalid && (kfzVbNr.dirty || kfzVbNr.touched))">
+                                <span *ngIf="kfzVbNr.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fahrgestellnummer -->
+                    <div class="form-group form-group-sm">
+                        <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+                        <label for="kfzFahrgestellNr" class="col-md-5 control-label">Fahrgestellnr.:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzFahrgestellNr" name="kfzFahrgestellNr" class="form-control" [ngClass]="{required: modus == 'antrag'}" placeholder="Fahrgestellnummer" aria-label="Fahrgestellnummer" [(ngModel)]="kfz.fahrgestellNr" #kfzFahrgestellNr="ngModel" [required]="modus == 'antrag' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="modus != 'antrag' && (kfzFahrgestellNr.invalid && (kfzFahrgestellNr.dirty || kfzFahrgestellNr.touched))">
+                                <span *ngIf="kfzFahrgestellNr.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Kennzeichen -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzKennzeichen" class="col-md-5 control-label">Kennzeichen:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzKennzeichen" name="kfzKennzeichen" class="form-control" [ngClass]="{required: modus == 'antrag'}" placeholder="Kennzeichen" aria-label="Kennzeichen" [(ngModel)]="kfz.kennzeichen" #kfzKennzeichen="ngModel" [required]="modus == 'antrag' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzKennzeichen.invalid && (kfzKennzeichen.dirty || kfzKennzeichen.touched)">
+                                <span *ngIf="kfzKennzeichen.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Erstzulassungsdatum -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzErstzulassungsDatum" class="col-md-5 control-label">Erstzulassung:</label>
+                        <div class="col-md-7">
+                            <input type="date" id="kfzErstzulassungsDatum" name="kfzErstzulassungsDatum" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Erstzulassungsdatum" aria-label="Erstzulassungsdatum" [(ngModel)]="kfz.erstzulassungsDatum" #kfzErstzulassungsDatum="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" useValueAsDate />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzErstzulassungsDatum.invalid && (kfzErstzulassungsDatum.dirty || kfzErstzulassungsDatum.touched)">
+                                <span *ngIf="kfzErstzulassungsDatum.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Anmeldedatum -->
+                    <div class="form-group form-group-sm">
+                        <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                        <label for="kfzAnmeldeDatum" class="col-md-5 control-label">Anmeldung:</label>
+                        <div class="col-md-7">
+                            <input type="date" id="kfzAnmeldeDatum" name="kfzAnmeldeDatum" class="form-control" [ngClass]="{required: modus == 'antrag'}" placeholder="Anmeldedatum" aria-label="Anmeldedatum" [(ngModel)]="kfz.anmeldeDatum" #kfzAnmeldeDatum="ngModel" [required]="modus == 'antrag' ? 'required' : null" useValueAsDate />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzAnmeldeDatum.invalid && (kfzAnmeldeDatum.dirty || kfzAnmeldeDatum.touched)">
+                                <span *ngIf="kfzAnmeldeDatum.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- Antrieb -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                        <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine-->
+                        <label for="kfzAntrieb" class="col-md-5 control-label">Antrieb:</label>
+                        <div class="col-md-7">
+                            <label class="radio-inline" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                                <input type="radio" id="kfzAntrieb_Benzin" name="kfzAntrieb" [value]="1" [(ngModel)]="kfz.antrieb" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" /> Benzin
+                            </label>
+                            <label class="radio-inline" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                                <input type="radio" id="kfzAntrieb_Diesel" name="kfzAntrieb" [value]="2" [(ngModel)]="kfz.antrieb" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" /> Diesel
+                            </label>
+                            <label class="radio-inline" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                                <input type="radio" id="kfzAntrieb_Hybrid" name="kfzAntrieb" [value]="3" [(ngModel)]="kfz.antrieb" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" /> Hybrid
+                            </label>
+                            <label class="radio-inline" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                                <input type="radio" id="kfzAntrieb_Elektro" name="kfzAntrieb" [value]="4" [(ngModel)]="kfz.antrieb" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" /> Elektro
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Leistung -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine'">
+                        <!-- Pkw / Lkw / 4RadKl50 / 4RadGr50 / Zugmaschine -->
+                        <label for="kfzLeistung" class="col-md-5 control-label">Leistung:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzLeistung" name="kfzLeistung" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Leistung" aria-label="Leistung" [(ngModel)]="kfz.leistung" #kfzLeistung="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" />
+                                <span class="input-group-addon">kW</span>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzLeistung.invalid && (kfzLeistung.dirty || kfzLeistung.touched)">
+                                <span *ngIf="kfzLeistung.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hubraum -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad'">
+                        <!-- Motorrad / Moped / Dreirad -->
+                        <label for="kfzHubraum" class="col-md-5 control-label">Hubraum:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzHubraum" name="kfzHubraum" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Hubraum" aria-label="Hubraum" [(ngModel)]="kfz.hubraum" #kfzHubraum="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" />
+                                <span class="input-group-addon">ccm</span>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzHubraum.invalid && (kfzHubraum.dirty || kfzHubraum.touched)">
+                                <span *ngIf="kfzHubraum.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sitzplaetze -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Moped'">
+                        <!--Moped-->
+                        <label for="kfzSitzplaetze" class="col-md-5 control-label">Sitzplätze:</label>
+                        <div class="col-md-7">
+                            <input type="text" id="kfzSitzplaetze" name="kfzSitzplaetze" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Sitzplätze" aria-label="Sitzplätze" [(ngModel)]="kfz.sitzplaetze" #kfzSitzplaetze="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" />
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzSitzplaetze.invalid && (kfzSitzplaetze.dirty || kfzSitzplaetze.touched)">
+                                <span *ngIf="kfzSitzplaetze.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nutzlast -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Lkw' || kfz.typ == 'Anhaenger'">
+                        <!--Lkw / Anhänger-->
+                        <label for="kfzNutzlast" class="col-md-5 control-label">Nutzlast:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzNutzlast" name="kfzNutzlast" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Nutzlast" aria-label="Nutzlast" [(ngModel)]="kfz.nutzlast" #kfzNutzlast="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" />
+                                <span class="input-group-addon">kg</span>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzNutzlast.invalid && (kfzNutzlast.dirty || kfzNutzlast.touched)">
+                                <span *ngIf="kfzNutzlast.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gesamtgewicht -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Lkw'">
+                        <!--Lkw-->
+                        <label for="kfzGesamtgewicht" class="col-md-5 control-label">Gesamtgewicht:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzGesamtgewicht" name="kfzGesamtgewicht" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Höchst zul. Gesamtgewicht" aria-label="Höchst zul. Gesamtgewicht" [(ngModel)]="kfz.gesamtgewicht" #kfzGesamtgewicht="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" />
+                                <span class="input-group-addon">kg</span>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzGesamtgewicht.invalid && (kfzGesamtgewicht.dirty || kfzGesamtgewicht.touched)">
+                                <span *ngIf="kfzGesamtgewicht.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Geschwindigkeit -->
+                    <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Zugmaschine'">
+                        <!--Zugmaschine-->
+                        <label for="kfzGeschwindigkeit" class="col-md-5 control-label">Geschwindigkeit:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzGeschwindigkeit" name="kfzGeschwindigkeit" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Geschwindigkeit" aria-label="Geschwindigkeit" [(ngModel)]="kfz.geschwindigkeit" #kfzGeschwindigkeit="ngModel" [required]="modus == 'antrag' || modus == 'angebot' ? 'required' : null" />
+                                <span class="input-group-addon">km/h</span>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzGeschwindigkeit.invalid && (kfzGeschwindigkeit.dirty || kfzGeschwindigkeit.touched)">
+                                <span *ngIf="kfzGeschwindigkeit.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <!-- Listenpreis -->
+                    <div class="form-group form-group-sm bg-success" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad'">
+                        <!-- Pkw / Lkw / Motorrad -->
+                        <label for="kfzListenpreis" class="col-md-5 control-label">Listenpreis:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzListenpreis" name="kfzListenpreis" class="form-control" placeholder="Listenpreis" aria-label="Listenpreis" [(ngModel)]="kfz.listenpreis" [disabled]="kfz.eingabeArt != undefined && kfz.eingabeArt != 3" currencyNumberFormatter />
+                                <span class="input-group-addon">€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sonderausstattung -->
+                    <div class="form-group form-group-sm bg-success" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad'">
+                        <!-- Pkw / Lkw / Motorrad -->
+                        <label for="kfzSonderausstattung" class="col-md-5 control-label">Sonderausstattung:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzSonderausstattung" name="kfzSonderausstattung" class="form-control" placeholder="Sonderausstattung" aria-label="Sonderausstattung" [(ngModel)]="kfz.sonderausstattung" currencyNumberFormatter />
+                                <span class="input-group-addon">€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Folierung -->
+                    <div class="form-group form-group-sm bg-success" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                        <!-- Pkw / Lkw -->
+                        <label for="kfzFolierung" class="col-md-5 control-label">Folierung:</label>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="text" id="kfzFolierung" name="kfzFolierung" class="form-control" placeholder="Folierung" aria-label="Folierung" [(ngModel)]="kfz.folierung" currencyNumberFormatter />
+                                <span class="input-group-addon">€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bonusstufe -->
+                    <div class="form-group form-group-sm bg-warning" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw'">
+                        <!-- Pkw / Lkw -->
+                        <label for="kfzBonusstufe" class="col-md-5 control-label">Bonusstufe:</label>
+                        <div class="col-md-7">
+                            <select id="kfzBonusstufe" name="kfzBonusstufe" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" aria-label="Wunschhauptfälligkeit" [(ngModel)]="kfz.bonusstufe" #kfzBonusstufe="ngModel" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null">
+                                <option value="" disabled selected hidden>Bonusstufe</option>
+                                <option [value]="'-2'" *ngIf="kfz.typ == 'Pkw'">-02</option>
+                                <option [value]="'-1'" *ngIf="kfz.typ == 'Pkw'">-01</option>
+                                <option [value]="'0'">00</option>
+                                <option [value]="'1'">01</option>
+                                <option [value]="'2'">02</option>
+                                <option [value]="'3'">03</option>
+                                <option [value]="'4'">04</option>
+                                <option [value]="'5'">05</option>
+                                <option [value]="'6'">06</option>
+                                <option [value]="'7'">07</option>
+                                <option [value]="'8'">08</option>
+                                <option [value]="'9'">09</option>
+                            </select>
+                            <div class="alert alert-danger" style="margin-top:5px;" role="alert" *ngIf="kfzBonusstufe.invalid && (kfzBonusstufe.dirty || kfzBonusstufe.touched)">
+                                <span *ngIf="kfzBonusstufe.errors.required">
+                                    Pflichtfeld!
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-info">
+                <div class="col-md-offset-6 col-md-6 ">
+                    <div class="row" style="padding-top:0.5em; padding-bottom:1em;">
+                        <div class="col-md-1">
+                            &nbsp;
+                        </div>
+                        <!-- KAT -->
+                        <div class="col-md-offset-2 col-md-2">
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw'">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="kfzHasKat" name="kfzHasKat" [(ngModel)]="kfz.hasKat" /> KAT
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mehr als 7 Sitzplätze -->
+                        <div class="col-md-2">
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw'">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="kfzHasSitze7Plus" name="kfzHasSitze7Plus" [(ngModel)]="kfz.hasSitze7Plus" /> 7+Sitze
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Oldtimer -->
+                        <div class="col-md-2">
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Motorrad'">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="kfzIsOldtimer" name="kfzIsOldtimer" [(ngModel)]="kfz.isOldtimer" /> Oldtimer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Steuerbefreit -->
+                        <div class="col-md-2">
+                            <div class="form-group form-group-sm" *ngIf="kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50'">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="kfzIsSteuerbefreit" name="kfzIsSteuerbefreit" [(ngModel)]="kfz.isSteuerbefreit" /> Steuerbefreit
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr *ngIf="modus == 'antrag'" />
+            <div class="panel panel-warning" *ngIf="modus == 'antrag' && (kfz.typ == 'Pkw' || kfz.typ == 'Lkw')">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- War der Antragsteller in den letzten 3 Jahren Halter eines PKW/Kombi oder wird die Stufe von einem Angehörigen übernommen? -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw -->
+                                <label for="kfzIsBonusMalus_Ja" class="col-md-5 control-label">War der Antragsteller in den letzten 3 Jahren Halter eines PKW/Kombi oder wird die Stufe von einem Angehörigen übernommen?</label>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsBonusMalus_Ja" name="kfzBonusMalus" [value]="1" [(ngModel)]="kfz.antragsfragen.isBonusMalus" /> Ja
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsBonusMalus_Uebernahme" name="kfzBonusMalus" [value]="2" [(ngModel)]="kfz.antragsfragen.isBonusMalus" /> Übernahme von Angehörigen
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsBonusMalus_Nein" name="kfzBonusMalus" [value]="3" [(ngModel)]="kfz.antragsfragen.isBonusMalus" /> Nein
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="kfz.antragsfragen.isBonusMalus == 1 || kfz.antragsfragen.isBonusMalus == 2">
+                            <!-- Versichert von -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw -->
+                                <label for="kfzBonusMalus_Unternehmen" class="col-md-5 control-label">Versichert von (Unternehmen):</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzBonusMalus_Unternehmen" name="kfzBonusMalus_Unternehmen" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Unternehmen" aria-label="Unternehmen" [(ngModel)]="kfz.antragsfragen.bonusMalusVersicherer" />
+                                </div>
+                            </div>
+                            <!-- Polizzen Nummer -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw -->
+                                <label for="kfzBonusMalus_PolNr" class="col-md-5 control-label">Polizzen Nr.:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzBonusMalus_PolNr" name="kfzBonusMalus_PolNr" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Polizzen Nummer" aria-label="Polizzen Nummer" [(ngModel)]="kfz.antragsfragen.bonusMalusPolNr" />
+                                </div>
+                            </div>
+                            <!-- Versicherung beendet am -->
+                            <div class="form-group form-group-sm">
+                                <!--Pkw / Lkw-->
+                                <label for="kfzBonusMalus_BeendetAm" class="col-md-5 control-label">Versicherung beendet am:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzBonusMalus_BeendetAm" name="kfzBonusMalus_BeendetAm" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="beendet am" aria-label="beendet am" [(ngModel)]="kfz.antragsfragen.bonusMalusBeendetAm" />
+                                </div>
+                            </div>
+                            <!-- Wegen -->
+                            <div class="form-group form-group-sm">
+                                <!--Pkw / Lkw-->
+                                <label for="kfzBonusMalus_Wegen" class="col-md-5 control-label">Wegen:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzBonusMalus_Wegen" name="kfzBonusMalus_Wegen" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Wegen" aria-label="Wegen" [(ngModel)]="kfz.antragsfragen.bonusMalusWegen" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning" *ngIf="modus == 'antrag' && (kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad' || kfz.typ == 'Moped' || kfz.typ == 'Dreirad' || kfz.typ == 'VierradKl50' || kfz.typ == 'VierradGr50' || kfz.typ == 'Zugmaschine' || kfz.typ == 'Anhaenger')">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Wurde dem Antragsteller bereits eine Kraftfahrzeugversicherung abgelehnt, gekündigt oder einvernehmlich aufgelöst? -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger -->
+                                <label for="kfzIsAbgelehnt_Ja" class="col-md-5 control-label">Wurde dem Antragsteller bereits eine Kraftfahrzeugversicherung abgelehnt, gekündigt oder einvernehmlich aufgelöst?</label>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsAbgelehnt_Ja" name="kfzAbgelehnt" [value]="1" [(ngModel)]="kfz.antragsfragen.isAbgelehnt" /> Ja
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsAbgelehnt_Nein" name="kfzAbgelehnt" [value]="2" [(ngModel)]="kfz.antragsfragen.isAbgelehnt" /> Nein
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="kfz.antragsfragen.isAbgelehnt == true">
+                            <!-- Grund -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine -->
+                                <label for="kfzAbgelehnt_Grund" class="col-md-5 control-label">Grund:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzAbgelehnt_Grund" name="kfzAbgelehnt_Grund" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Grund" aria-label="Grund" [(ngModel)]="kfz.antragsfragen.abgelehntGrund" />
+                                </div>
+                            </div>
+                            <!-- Unternehmen -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / 4RadKl50 / 4RadGr50 / Zugmaschine -->
+                                <label for="kfzAbgelehnt_Unternehmen" class="col-md-5 control-label">Unternehmen:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzAbgelehnt_Unternehmen" name="kfzAbgelehnt_Unternehmen" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Unternehmen" aria-label="Unternehmen" [(ngModel)]="kfz.antragsfragen.abgelehntUnternehmen" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning" *ngIf="modus == 'antrag' && (kfz.typ == 'Pkw' || kfz.typ == 'Lkw' ||  kfz.typ == 'Motorrad')">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Wurde von einem Versicherer in den letzten 3 Jahren eine Kaskoentschädigung geleistet? -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / Motorrad -->
+                                <label for="kfzIsKasko_Ja" class="col-md-5 control-label">Wurde von einem Versicherer in den letzten 3 Jahren eine Kaskoentschädigung geleistet?</label>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsKasko_Ja" name="kfzKasko" [value]="1" [(ngModel)]="kfz.antragsfragen.isKasko" /> Ja
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzIsKasko_Nein" name="kfzKasko" [value]="2" [(ngModel)]="kfz.antragsfragen.isKasko" /> Nein
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="kfz.antragsfragen.isKasko == true">
+                            <!-- Grund -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine -->
+                                <label for="kfzKasko_Grund" class="col-md-5 control-label">Grund:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzKasko_Grund" name="kfzKasko_Grund" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Grund" aria-label="Grund" [(ngModel)]="kfz.antragsfragen.kaskoGrund" />
+                                </div>
+                            </div>
+                            <!-- Bestehen unbehobene Schäden am Fahrzeug? -->
+                            <div class="form-group form-group-sm">
+                                <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine-->
+                                <label for="kfzKasko_HasSchaeden_Ja" class="col-md-5 control-label">Bestehen unbehobene Schäden am Fahrzeug?</label>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzKasko_HasSchaeden_Ja" name="kfzKasko_HasSchaeden" [value]="true" [(ngModel)]="kfz.antragsfragen.kaskoHasSchaden" /> Ja
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzKasko_HasSchaeden_Nein" name="kfzKasko_HasSchaeden" [value]="false" [(ngModel)]="kfz.antragsfragen.kaskoHasSchaden" /> Nein
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Welche -->
+                            <div class="form-group form-group-sm" *ngIf="kfz.antragsfragen.kaskoHasSchaden">
+                                <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine-->
+                                <label for="kfzKasko_Schaeden_Welche" class="col-md-5 control-label">Welche:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzKasko_Schaeden_Welche" name="kfzKasko_Schaeden_Welche" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Welche" aria-label="Welche" [(ngModel)]="kfz.antragsfragen.kaskoSchadenWelche" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-warning" *ngIf="modus == 'antrag' && (kfz.typ == 'Pkw' || kfz.typ == 'Lkw' || kfz.typ == 'Motorrad')">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Soll eine Vinkulierung erfolgen? (Kasko) -->
+                            <div class="form-group form-group-sm">
+                                <!-- Pkw / Lkw / Motorrad -->
+                                <label for="kfzHasVinkulierung_Ja" class="col-md-5 control-label">Soll eine Vinkulierung erfolgen? (Kasko)</label>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzHasVinkulierung_Ja" name="kfzVinkulierung" [value]="1" [(ngModel)]="kfz.antragsfragen.hasVinkulierung" /> Ja
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id="kfzHasVinkulierung_Nein" name="kfzVinkulierung" [value]="2" [(ngModel)]="kfz.antragsfragen.hasVinkulierung" /> Nein
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="kfz.antragsfragen.hasVinkulierung == true">
+                            <!-- Vinkulierung zu gunsten -->
+                            <div class="form-group form-group-sm">
+                                <label for="kfzVinkulierung_ZuGunsten" class="col-md-5 control-label">Vinkulierung zu gunsten:</label>
+                                <div class="col-md-7">
+                                    <input type="text" id="kfzVinkulierung_ZuGunsten" name="kfzVinkulierung_ZuGunsten" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Vinkulierung zu gunsten" aria-label="Grund" [(ngModel)]="kfz.antragsfragen.vinkulierungZuGunsten" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1em;">
+                <div class="col-md-offset-9 col-md-3">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" (click)="onCancel()">
+                                Abbrechen
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success" (click)="onOk(kfz)" data-style="expand-left" [disabled]="!formKfzEdit.form.valid">
+                                Übernehmen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

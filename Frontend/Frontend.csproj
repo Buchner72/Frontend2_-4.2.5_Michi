@@ -1,0 +1,156 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\footer\footer.component.ts" />
+    <None Remove="ClientApp\app\components\formatter\currency-number-formatter.directive.ts" />
+    <None Remove="ClientApp\app\components\progressbar\vertrag-progress.component.ts" />
+    <None Remove="ClientApp\app\components\progressbar\vertrag-progress.service.ts" />
+    <None Remove="ClientApp\app\components\tryout\tryout.component.ts" />
+    <None Remove="ClientApp\app\components\valueAccessor\date-value-accessor.ts" />
+    <None Remove="ClientApp\app\components\vertrag\fp\fp-list.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\fp\fp-new.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\fp\fp.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\he\he.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\he\_model\he.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\kfz-edit.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_eurotax\eurotax.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\is.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\kfz-list.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\kfz.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\produkte\kfz-haftpflicht.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\produkte\kfz-kasko.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\produkte\kfz-rechtsschutz.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\EutaxFahrzeug.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\EutaxMarke.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\EutaxModell.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\EutaxTyp.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-anhaenger.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-antragsfragen.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-dreirad.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-lkw.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-moped.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-motorrad.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-pkw.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-vierradGr50.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-vierradKl50.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz-zugmaschine.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kfz\_model\kfz.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\kv\kv.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\rs\_model\rs.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\rs\rs.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\uvk\uvk.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\uv\uv.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vn\vn-edit.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vn\_model\vn.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vn\vn-list.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vn\vn.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vp\_model\vp.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\_model\vertrag-common.model.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vertrag.component.ts" />
+    <None Remove="ClientApp\app\components\vertrag\vertrag.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\footer\footer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\formatter\currency-number-formatter.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\formatter\currency-number.pipe.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\progressbar\vertrag-progress.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\progressbar\vertrag-progress.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\tryout\tryout.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\valueAccessor\date-value-accessor.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\fp\fp-list.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\fp\fp-new.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\fp\fp.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\he\_model\he.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\he\he.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\eurotax.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\produkte\kfz-insassen.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\produkte\kfz-rechtsschutz.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\produkte\kfz-kasko.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\produkte\kfz-haftpflicht.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\_model\EutaxMarke.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\_model\EutaxModell.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\_model\EutaxFahrzeug.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\_model\EutaxTyp.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-anhaenger.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-antragsfragen.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-dreirad.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-lkw.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-moped.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-motorrad.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-pkw.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-vierradGr50.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-vierradKl50.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz-zugmaschine.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_model\kfz.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\kfz-list.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\kfz-edit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\kfz.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kfz\_eurotax\_service\eurotax.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\kv\kv.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\rs\_model\rs.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\rs\rs.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\uvk\uvk.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\uv\uv.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vn\vn-list.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vn\vn-edit.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vn\vn.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\_model\vertrag-common.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vertrag.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vertrag.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vn\_model\vn.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\vertrag\vp\_model\vp.model.ts" />
+  </ItemGroup>
+
+  <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+
+    <!-- In development, the dist files won't exist on the first run or when cloning to
+         a different machine, so rebuild them if not already present. -->
+    <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="wwwroot\dist\**; ClientApp\dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

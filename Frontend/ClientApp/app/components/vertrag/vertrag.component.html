@@ -1,0 +1,276 @@
+﻿<div>
+    <vertrag-progress></vertrag-progress>
+    <div class="container-fluid">
+        <!--<div class="row">
+            <div class="col-md-12">
+                <p>percent: {{percent | json}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                Session Test:
+                <div class="btn-group btn-group-justified">
+                    <label class="btn btn-default" title="Test">
+                        <input type="checkbox" id="test" autocomplete="off" style="visibility:hidden; width:0px;" (click)="testSession()" /> Fire
+                    </label>
+                </div>
+                <hr />
+            </div>
+        </div>-->
+        <!--<div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-danger btn-xs" title="test..." (click)="onTest()"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button>
+            </div>
+        </div>-->
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Vertrag:</h4>
+                <div class="row">
+                    <div class="col-sm-1">
+                        <div class="btn-toolbar">
+                            <button type="button" class="btn btn-block btn-primary btn-xs" title="Vertrag NEU..." (click)="onReset();">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Neu...
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="btn-toolbar">
+                            <button type="button" class="btn btn-block btn-primary btn-xs" title="Vertrag LADEN..." (click)="visibilityFileSelector = true;">
+                                <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Laden...
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="btn-toolbar">
+                            <button type="button" class="btn btn-block btn-primary btn-xs" title="Vertrag SPEICHERN..." (click)="onSaveOk()">
+                                <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Speichern...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="visibilityFileSelector">
+            <div class="col-sm-12">
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-1">
+                    <input type="file" id="upload" name="upload" class="form-control" accept='text/xml' (change)="onUploadChange($event.target.files)" #upload />
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success btn-sm" title="Vertrag LADEN..." (click)="onLoadOk(upload.files)" [disabled]="!isLoadable">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" title="ABBRECHEN..." (click)="visibilityFileSelector = false; isLoadable = false; upload.value = null">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Plattform:</h4>
+                <div class="btn-group-sm btn-group-justified">
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: plattform == 'muki'}">
+                        <input type="radio" name="plattformMuki" id="plattformMuki" autocomplete="off" value="muki" style="visibility:hidden; width:0px;" disabled="disabled" [(ngModel)]="plattform" /> muki
+                    </label>
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: plattform == 'tis'}">
+                        <input type="radio" name="plattformTis" id="plattformTis" autocomplete="off" value="tis" style="visibility:hidden; width:0px;" disabled="disabled" [(ngModel)]="plattform" /> tis
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Kunde:</h4>
+                <div class="btn-group-sm btn-group-justified">
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: kunde == 'privat'}">
+                        <input type="radio" name="kunde" id="kundePrivat" autocomplete="off" value="privat" style="visibility:hidden; width:0px;" (click)="onSetKunde('privat')" [(ngModel)]="kunde" /> Privat
+                    </label>
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: kunde == 'gewerbe'}">
+                        <input type="radio" name="kunde" id="kundeGewerbe" autocomplete="off" value="gewerbe" style="visibility:hidden; width:0px;" (click)="onSetKunde('gewerbe')" [(ngModel)]="kunde" /> Gewerbe
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Modus:</h4>
+                <div class="btn-group-sm btn-group-justified">
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: modus == 'angebot'}">
+                        <input type="radio" name="modus" id="modusAngebot" autocomplete="off" value="angebot" style="visibility:hidden; width:0px;" (click)="onSetModus('angebot')" [(ngModel)]="modus" /> Angebot
+                    </label>
+                    <label class="btn btn-default btn-sm" [ngClass]="{active: modus == 'antrag'}">
+                        <input type="radio" name="modus" id="modusAntrag" autocomplete="off" value="antrag" style="visibility:hidden; width:0px;" (click)="onSetModus('antrag')" [(ngModel)]="modus" /> Antrag
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="plattform == 'muki'">
+            <div class="col-md-12">
+                <h4>Sparten:</h4>
+                <!-- Privat -->
+                <div class="btn-group-sm btn-group-justified" *ngIf="kunde == 'privat'">
+                    <label class="btn btn-default btn-sm" title="Sparte Person / FamilyPlus" [ngClass]="{active: isEnabledPFp == true}">
+                        <input type="checkbox" #spartePFp id="spartePFp" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePFp(spartePFp.checked)" [(ngModel)]="isEnabledPFp" /> <span class="label label-primary">P</span>&nbsp;FP
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Person / Krankenversicherung" [ngClass]="{active: isEnabledPKv == true}">
+                        <input type="checkbox" #spartePKv id="spartePKv" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePKv(spartePKv.checked)" [(ngModel)]="isEnabledPKv" /> <span class="label label-primary">P</span>&nbsp;KV
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Person / Unfallversicherung" [ngClass]="{active: isEnabledPUv == true}">
+                        <input type="checkbox" #spartePUv id="spartePUv" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePUv(spartePUv.checked)" [(ngModel)]="isEnabledPUv" /> <span class="label label-primary">P</span>&nbsp;UV
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Person / Unfallversicherung Kind" [ngClass]="{active: isEnabledPUvk == true}">
+                        <input type="checkbox" #spartePUvk id="spartePUvk" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePUvk(spartePUvk.checked)" [(ngModel)]="isEnabledPUvk" /> <span class="label label-primary">P</span>&nbsp;UVK
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Sach / Kfz" [ngClass]="{active: isEnabledPKfz == true}">
+                        <input type="checkbox" #spartePKfz id="spartePKfz" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePKfz(spartePKfz.checked)" [(ngModel)]="isEnabledPKfz" /> <span class="label label-info">S</span>&nbsp;KFZ
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Sach / Haushalt-Eigenheim" [ngClass]="{active: isEnabledPHe == true}">
+                        <input type="checkbox" #spartePHe id="spartePHe" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePHe(spartePHe.checked)" [(ngModel)]="isEnabledPHe" /> <span class="label label-info">S</span>&nbsp;HE
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Rechtsschutz / Rechtsschutz" [ngClass]="{active: isEnabledPRs == true}">
+                        <input type="checkbox" #spartePRs id="spartePRs" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePRs(spartePRs.checked)" [(ngModel)]="isEnabledPRs" /> <span class="label label-default">R</span>&nbsp;RS
+                    </label>
+                </div>
+                <!-- Gewerbe -->
+                <div class="btn-group-sm btn-group-justified" *ngIf="kunde == 'gewerbe'">
+                    <label class="btn btn-default btn-sm" title="Sparte Sach / Kfz" [ngClass]="{active: isEnabledGKfz == true}">
+                        <input type="checkbox" #sparteGKfz id="sparteGKfz" autocomplete="off" style="visibility:hidden; width:0px;" (click)="setEnableableGKfz(sparteGKfz.checked)" [(ngModel)]="isEnabledGKfz" /> <span class="label label-info">S</span>&nbsp;KFZ
+                    </label>
+                    <label class="btn btn-default btn-sm" title="Sparte Sach / Gebäude Betriebsinhalt Betriebshaftpflicht" [ngClass]="{active: isEnabledGGeb == true}">
+                        <input type="checkbox" #sparteGGeb id="sparteGGeb" autocomplete="off" style="visibility:hidden; width:0px;" (click)="setEnableableGGeb(sparteGGeb.checked)" [(ngModel)]="isEnabledGGeb" /> <span class="label label-info">S</span>&nbsp;GEB
+                    </label>
+                </div>
+                <h4 *ngIf="isEnabledPFp == false && isEnabledPKv == false && isEnabledPUv == false && isEnabledPKfz == false && isEnabledPHe == false && isEnabledPRs == false"><span class="label label-warning">ACHTUNG: Mindestens eine Sparte auswählen!</span></h4>
+            </div>
+        </div>
+        <hr />
+        <h4>Vertragsdaten</h4>
+        <!-- Privat -->
+        <div id="accordionVertragPrivat" class="panel-group" role="tablist" aria-multiselectable="true" *ngIf="kunde == 'privat'">
+            <!-- Privat P/Versicherungsnehmer -->
+            <vn [modus]="modus"
+                [isEnabledPFp]="isEnabledPFp"
+                [isEnabledPKv]="isEnabledPKv"
+                [isEnabledPUv]="isEnabledPUv"
+                [isEnabledPKfz]="isEnabledPKfz"
+                [isEnabledPHe]="isEnabledPHe"
+                [isEnabledPRs]="isEnabledPRs"
+                (emitVn)="doSetVn($event)"></vn>
+            <!-- Privat P/FamilyPlus FP -->
+            <fp [isEnabledPFp]="isEnabledPFp" style="display:block; margin-top:5px;"></fp>
+            <!-- Privat P/Krankenversicherung KV -->
+            <kv [isEnabledPKv]="isEnabledPKv" style="display:block; margin-top:5px;"></kv>
+            <!-- Privat P/Unfallversicherung UV -->
+            <uv [isEnabledPUv]="isEnabledPUv" style="display:block; margin-top:5px;"></uv>
+            <!-- Privat P/Unfallversicherung UV -->
+            <uvk [isEnabledPUvk]="isEnabledPUvk" style="display:block; margin-top:5px;"></uvk>
+            <!-- Privat S/Fahrzeug KFZ -->
+            <kfz [modus]="modus" [isEnabledPKfz]="isEnabledPKfz" [vn]="vn" style="display:block; margin-top:5px;" #kfzReferenz></kfz>
+            <!-- Privat S/Haushalt-Eigenheim HE -->
+            <he [isEnabledPHe]="isEnabledPHe" style="display:block; margin-top:5px;"></he>
+            <!-- Privat R/Rechtsschutz RS -->
+            <rs [isEnabledPRs]="isEnabledPRs" style="display:block; margin-top:5px;"></rs>
+        </div>
+        <!-- Gewerbe -->
+        <div id="accordionVertragGewerbe" class="panel-group" role="tablist" aria-multiselectable="true" *ngIf="kunde == 'gewerbe' && (modus == 'angebot' || modus == 'antrag') && (isEnabledGKfz || isEnabledGGeb)">
+            <!-- Gewerbe S/Fahrzeug KFZ -->
+            <div class="panel panel-default" *ngIf="isEnabledGKfz">
+                <div class="panel-heading" role="tab" id="headingKfz">
+                    <div class="row">
+                        <div class="col-xs-10 col-md-3">
+                            <h4 class="panel-title">
+                                <span class="label label-default">R</span>&nbsp;
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseKfz" aria-expanded="false" aria-controls="collapseKfz">
+                                    Kfz
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="col-xs-1 col-md-1">
+                            <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseKfz" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingKfz">
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Kfz (1)
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                        <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Daten: ...<br />
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Gewerbe S/Fahrzeug KFZ -->
+            <!-- Gewerbe S/Gebäude Betriebsinhalt Betriebshaftpflicht -->
+            <div class="panel panel-default" *ngIf="isEnabledGGeb">
+                <div class="panel-heading" role="tab" id="headingGeb">
+                    <div class="row">
+                        <div class="col-xs-10 col-md-3">
+                            <h4 class="panel-title">
+                                <span class="label label-default">R</span>&nbsp;
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGeb" aria-expanded="false" aria-controls="collapseGeb">
+                                    Gebäude
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="col-xs-1 col-md-1">
+                            <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseGeb" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGeb">
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Gebäude (1)
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                        <a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Daten: ...<br />
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="col-md-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Gewerbe S/Eigenheim-Haushalt EH -->
+        </div>
+    </div>
+</div>

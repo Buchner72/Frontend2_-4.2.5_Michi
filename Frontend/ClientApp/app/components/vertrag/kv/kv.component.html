@@ -1,0 +1,38 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPKv">
+    <div class="panel-heading" role="tab" id="headingPKv">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title"><span class="label label-primary">P</span> Kranken&shy;versicherung</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="isPanelBodyPKv = !isPanelBodyPKv">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isPanelBodyPKv"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isPanelBodyPKv"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePKv" class="panel-collapse collapse" [ngClass]="{in: isPanelBodyPKv == true}" role="tabpanel" aria-labelledby="headingPKv">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="btn-group btn-group-xs">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-primary btn-xs" title="Versicherte Person NEU..." dropdownToggle><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> versicherte Person <span class="caret" aria-hidden="true"></span></button>
+                            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                <li role="menuitem"><a href="#">Einzelperson</a></li>
+                                <li role="menuitem"><a href="#">Alleinerzieher</a></li>
+                                <li role="menuitem"><a href="#">Partner</a></li>
+                                <li role="menuitem"><a href="#">Familie</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li role="menuitem"><a href="#">weiteres Kind</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h4><span class="label label-warning">ACHTUNG: Versicherte Person(en) anlegen!</span></h4>
+        </div>
+    </div>
+</div>

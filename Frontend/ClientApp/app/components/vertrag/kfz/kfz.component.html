@@ -1,0 +1,113 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPKfz">
+    <div class="panel-heading" role="tab" id="headingPKfz">
+        <div class="row">
+            <div class="col-xs-10 col-sm-3">
+                <h4 class="panel-title"><span class="label label-info">S</span> Kraftfahrzeug</h4>
+            </div>
+            <div class="col-sm-1 col-sm-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="onToggleCollapseable()">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isCollapsed"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isCollapsed"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePKfz" class="panel-collapse collapse" [ngClass]="{in: isCollapsed == true}" role="tabpanel" aria-labelledby="headingPKfz">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="btn-group btn-group-xs" dropdown>
+                        <button type="button" class="btn btn-primary btn-xs disabled" title="Fahrzeug NEU..." *ngIf="vn == undefined || vn?.alter < 15">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Fahrzeug <span class="caret" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-xs" title="Fahrzeug NEU..." dropdownToggle *ngIf="vn?.alter >= 15">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Fahrzeug <span class="caret" aria-hidden="true"></span>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Pkw/Kombi</a>
+                                <a role="button" (click)="onKfzNew('Pkw')" *ngIf="!vn.hasErrorVn_Alter21">Pkw/Kombi</a>
+                            </li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
+                                <a role="button" (click)="onKfzNew('Lkw')" *ngIf="!vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
+                                <a role="button" (click)="onKfzNew('Motorrad')" *ngIf="!vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
+                            </li>
+                            <li role="menuitem">
+                                <a role="button" (click)="onKfzNew('Moped')">Zweirad/Moped</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Dreirad</a>
+                                <a role="button" (click)="onKfzNew('Dreirad')" *ngIf="!vn.hasErrorVn_Alter21">Dreirad</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
+                                <a role="button" (click)="onKfzNew('VierradKl50')" *ngIf="!vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
+                            </li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
+                                <a role="button" (click)="onKfzNew('VierradGr50')" *ngIf="!vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Zugmaschine</a>
+                                <a role="button" (click)="onKfzNew('Zugmaschine')" *ngIf="!vn.hasErrorVn_Alter21">Zugmaschine</a>
+                            </li>
+                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Anhänger</a>
+                                <a role="button" (click)="onKfzNew('Anhaenger')" *ngIf="!vn.hasErrorVn_Alter21">Anhänger</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!-- Hinweise zur Produktlogik -->
+            <h4 *ngIf="vn === undefined">
+                <span class="label label-warning">
+                    ACHTUNG: Für die Sparte Kfz wird ein Versicherungsnehmer benötigt!
+                </span>
+            </h4>
+            <h4 *ngIf="vn && vn?.hasErrorVn_Alter15">
+                <span class="label label-warning">
+                    ACHTUNG: Kein Annahme für Lenker unter 15 Jahre!
+                </span>
+            </h4>
+            <h4 *ngIf="vn && vn?.hasErrorVn_Alter21">
+                <span class="label label-warning">
+                    ACHTUNG: Kein Annahme für Lenker unter 21 Jahre für Pkw / Lkw / Motorrad / Dreirad / VierradGr50 / VierradKl50 / Zugmaschine / Anhänger!
+                </span>
+            </h4>
+            <h4 *ngIf="vn && vn?.hasErrorVn_Alter75">
+                <span class="label label-warning">
+                    ACHTUNG: Anfragepflichtig für Lenker ab dem vollendeten 75. Lebensjahr!
+                </span>
+            </h4>
+            <!-- Kfz New -->
+            <kfz-edit [modus]="modus"
+                      [kfz]="kfzNew"
+                      (onEmitKfz)="doKfzAdd($event)"
+                      *ngIf="kfzNew !== undefined"></kfz-edit>
+            <br *ngIf="kfzNew !== undefined" />
+            <!-- Kfz View/Edit -->
+            <kfz-list [modus]="modus"
+                      [vn]="vn"
+                      [kfzList]="kfzList"
+                      (emitKfzUpdate)="doKfzUpdate($event)"
+                      (emitKfzDelete)="doKfzDelete($event)"
+                      (emitToggleHaftpflicht)="doToggleHaftpflicht($event)"
+                      (emitUpdateHaftpflicht)="doUpdateHaftpflicht($event)"
+                      (emitToggleKasko)="doToggleKasko($event)"
+                      (emitUpdateKasko)="doUpdateKasko($event)"
+                      (emitToggleRechtsschutz)="doToggleRechtsschutz($event)"
+                      (emitToggleInsassen)="doToggleInsassen($event)"
+                      *ngIf="kfzList !== undefined"></kfz-list>
+        </div>
+    </div>
+</div>

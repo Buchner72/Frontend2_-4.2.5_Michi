@@ -1,0 +1,33 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPUvk">
+    <div class="panel-heading" role="tab" id="headingPUvk">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title"><span class="label label-primary">P</span> Unfall&shy;versicherung Kind</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="isPanelBodyPUvk = !isPanelBodyPUvk">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isPanelBodyPUvk"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isPanelBodyPUvk"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePUvk" class="panel-collapse collapse" [ngClass]="{in: isPanelBodyPUvk == true}" role="tabpanel" aria-labelledby="headingPUvk">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="btn-group btn-group-xs">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-primary btn-xs" title="Versicherte Person NEU..." dropdownToggle><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> versicherte Person <span class="caret" aria-hidden="true"></span></button>
+                            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                <li role="menuitem"><a href="#">Kind</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h4><span class="label label-warning">ACHTUNG: Versicherte Person(en) anlegen!</span></h4>
+        </div>
+    </div>
+</div>

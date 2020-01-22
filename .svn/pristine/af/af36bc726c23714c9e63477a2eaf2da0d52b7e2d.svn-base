@@ -1,0 +1,41 @@
+﻿<div class="panel panel-default" *ngIf="isEnabledPFp">
+    <div class="panel-heading" role="tab" id="headingPFp">
+        <div class="row">
+            <div class="col-xs-10 col-md-3">
+                <h4 class="panel-title"><span class="label label-primary">P</span> FamilyPlus</h4>
+            </div>
+            <div class="col-md-1 col-md-offset-8">
+                <button type="button" class="btn btn-default btn-xs" (click)="onToggleCollapse()">
+                    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" *ngIf="!isCollapsed"></span>
+                    <span class="glyphicon glyphicon-menu-up" aria-hidden="true" *ngIf="isCollapsed"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="collapsePFp" class="panel-collapse collapse" [ngClass]="{in: isCollapsed == true}" role="tabpanel" aria-labelledby="headingPFp">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="btn-group btn-group-xs">
+                        <div class="btn-group" dropdown>
+                            <button type="button" class="btn btn-primary btn-xs" title="Versicherte Person NEU..." dropdownToggle><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> versicherte Person <span class="caret" aria-hidden="true"></span></button>
+                            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                <li role="menuitem"><a role="button" (click)="getVpNew()">Alleinerzieher</a></li>
+                                <li role="menuitem"><a role="button" (click)="getVpNew()">Familie</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li role="menuitem"><a role="button" (click)="getVpNew()">weiteres Kind</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!-- Vp New -->
+            <fp-new [modus]="modus" [vp]="vpNew" (onEmitVp)="addVp($event)" *ngIf="vpNew !== undefined"></fp-new>
+            <br *ngIf="vpNew !== undefined" />
+            <!-- Vp View/Edit -->
+            <fp-list [modus]="modus" [vpList]="vpList" (onEmitVpUpdate)="updateVp($event)" (onEmitVpDelete)="deleteVp($event)" *ngIf="vpList !== undefined"></fp-list>
+            <h4 *ngIf="vpList?.length == 0 && vpNew == undefined"><span class="label label-warning">ACHTUNG: Versicherte Person(en) anlegen!</span></h4>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,246 @@
+﻿<!-- ### Eurotax MarkeModell -->
+<!-- Baujahr <Select> Eurotax/MarkeModell -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1 || kfz.eingabeArt == 2) && (!isFahrzeugSelected)">
+    <!--Pkw / Lkw-->
+    <label for="kfzBaujahrSearch" class="col-md-5 control-label">Baujahr:</label>
+    <div class="col-md-7">
+        <select id="kfzBaujahrSearchJahr" name="kfzBaujahrSearchJahr" class="form-control pull-left" style="display:inline; width:45%;" aria-label="Baujahr Jahr" [(ngModel)]="searchBaujahrJahr" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null">
+            <option value="undefined" disabled selected hidden>Jahr</option>
+            <option [value]="'2018'">2018</option>
+            <option [value]="'2017'">2017</option>
+            <option [value]="'2016'">2016</option>
+            <option [value]="'2015'">2015</option>
+            <option [value]="'2014'">2014</option>
+            <option [value]="'2013'">2013</option>
+            <option [value]="'2012'">2012</option>
+            <option [value]="'2011'">2011</option>
+            <option [value]="'2010'">2010</option>
+            <option [value]="'2009'">2009</option>
+            <option [value]="'2008'">2008</option>
+            <option [value]="'2007'">2007</option>
+            <option [value]="'2006'">2006</option>
+            <option [value]="'2005'">2005</option>
+            <option [value]="'2004'">2004</option>
+            <option [value]="'2003'">2003</option>
+            <option [value]="'2002'">2002</option>
+        </select>
+        <select id="kfzBaujahrSearchMonat" name="kfzBaujahrSearchMonat" class="form-control pull-right" style="display:inline; width:45%;" aria-label="Baujahr Monat" [(ngModel)]="searchBaujahrMonat" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null">
+            <option value="undefined" disabled selected hidden>Monat</option>
+            <option [value]="'01'">01</option>
+            <option [value]="'02'">02</option>
+            <option [value]="'03'">03</option>
+            <option [value]="'04'">04</option>
+            <option [value]="'05'">05</option>
+            <option [value]="'06'">06</option>
+            <option [value]="'07'">07</option>
+            <option [value]="'08'">08</option>
+            <option [value]="'09'">09</option>
+            <option [value]="'10'">10</option>
+            <option [value]="'11'">11</option>
+            <option [value]="'12'">12</option>
+        </select>
+    </div>
+</div>
+<!-- Marke <Input> Eurotax/MarkeModell -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 2) && (!isFahrzeugSelected)">
+    <!-- Pkw / Lkw -->
+    <label for="kfzMarkeSearch" class="col-md-5 control-label">Marke (Eurotax):</label>
+    <div class="col-md-7">
+        <input type="text" id="kfzMarkeSearch" name="kfzMarkeSearch" class="form-control" placeholder="Marke" aria-label="Markensuche" [(ngModel)]="searchNameMarke" (keyup)="onSearchMarke(kfz.typ)" (focus)="onFocusMarke(kfz.typ)" autocomplete="off" [disabled]="(!searchBaujahrJahr || !searchBaujahrMonat)" />
+    </div>
+</div>
+<!-- Liste Marken -->
+<div class="container">
+    <div style="position: absolute; width:100%; z-index:999;" [ngStyle]="{'visibility':isVisibleSearchMarken?'visible':'hidden'}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row bg-primary">
+                    <div class="col-sm-10">
+                        <h5 style="margin-left:0.5em;">Markenauswahl:</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-xs btn-danger" style="margin-top:7px; margin-left:10px;" (click)="onCloseMarkeList();"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 bg-info" style="border-bottom:5px solid red;">
+                <div class="list-group" style="min-height:50px; max-height:300px; overflow-y:scroll">
+                    <button type="button" class="list-group-item small" (click)="onSelectMarke(kfz.typ, marke.name, marke.natCode)" *ngFor="let marke of listMarken">
+                        <b>{{marke.name}}</b><br />({{marke.natCode}})
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-danger small" *ngIf="listMarken == ''">
+                        <b>keine Treffer</b><br />unter diesen Suchkriterien!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modell <Input> Eurotax/MarkeModell -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 2) && (!isFahrzeugSelected)">
+    <!-- Pkw / Lkw -->
+    <label for="kfzModellSearch" class="col-md-5 control-label">Modell (Eurotax):</label>
+    <div class="col-md-7">
+        <input type="text" id="kfzModellSearch" name="kfzModellSearch" class="form-control" placeholder="Modell" aria-label="Modellsuche" [(ngModel)]="searchNameModell" (keyup)="onSearchModell(kfz.typ)" (focus)="onFocusModell(kfz.typ)" autocomplete="off" [disabled]="!nationalCodeMarke" />
+    </div>
+</div>
+<!-- Liste Modelle -->
+<div class="container">
+    <div style="position: absolute; width:100%; z-index:999;" [ngStyle]="{'visibility':isVisibleSearchModelle?'visible':'hidden'}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row bg-primary">
+                    <div class="col-sm-10">
+                        <h5 style="margin-left:0.5em;">Modellauswahl:</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-xs btn-danger" style="margin-top:7px; margin-left:10px;" (click)="onCloseModellList();"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 bg-info" style="border-bottom:5px solid red;">
+                <div class="list-group" style="min-height:50px; max-height:300px; overflow-y:scroll">
+                    <button type="button" class="list-group-item small" (click)="onSelectModell(kfz.typ, modell.name, modell.natCode)" *ngFor="let modell of listModelle">
+                        <b>{{modell.name}}</b><br />{{modell.importVonBis}} / ({{modell.natCode}})
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-danger small" *ngIf="listModelle == ''">
+                        <b>keine Treffer</b><br />unter diesen Suchkriterien!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Typ <Input> Eurotax/MarkeModell -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 2) && (!isFahrzeugSelected)">
+    <!-- Pkw / Lkw -->
+    <label for="kfzTypSearch" class="col-md-5 control-label">Typ (Eurotax):</label>
+    <div class="col-md-7">
+        <input type="text" id="kfzTypSearch" name="kfzTypSearch" class="form-control" placeholder="Typ" aria-label="Typsuche" [(ngModel)]="searchNameTyp" (keyup)="onSearchTyp(kfz.typ)" (focus)="onFocusTyp(kfz.typ)" autocomplete="off" [disabled]="!nationalCodeMarke || !nationalCodeModell" />
+    </div>
+</div>
+<!-- Liste Typen -->
+<div class="container">
+    <div style="position: absolute; width:100%; z-index:999;" [ngStyle]="{'visibility':isVisibleSearchTypen?'visible':'hidden'}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row bg-primary">
+                    <div class="col-sm-10">
+                        <h5 style="margin-left:0.5em;">Typauswahl:</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-xs btn-danger" style="margin-top:7px; margin-left:10px;" (click)="onCloseTypList()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 bg-info" style="border-bottom:5px solid red;">
+                <div class="list-group" style="min-height:50px; max-height:300px; overflow-y:scroll">
+                    <button type="button" class="list-group-item small" (click)="onSelectTyp(kfz.typ, typ.name, typ.natCode)" *ngFor="let typ of listTypen">
+                        <b>{{typ.name}}</b><br />kW: {{typ.kw}}/Ps: {{typ.ps}}; Türen: {{typ.tueren}}; Zylinder: {{typ.zylinder}}; Sitzplätze: {{typ.sitze}}<br />{{typ.importVonBis}} (NatCode: {{typ.natCode}})
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-danger small" *ngIf="listTypen == ''">
+                        <b>keine Treffer</b><br />unter diesen Suchkriterien!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Liste Preishistory Marke/Modell -->
+<div class="container">
+    <div style="position: absolute; width:100%; z-index:999;" [ngStyle]="{'visibility':isVisibleSearchFahrzeuge?'visible':'hidden'}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row bg-primary">
+                    <div class="col-sm-10">
+                        <h5 style="margin-left:0.5em;">Fahrzeugauswahl:</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-xs btn-danger" style="margin-top:7px; margin-left:10px;" (click)="onCloseFahrzeugList()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 bg-info pull-right" style="border-bottom:5px solid green;">
+                <div class="list-group" style="min-height:50px; max-height:300px; overflow-y:scroll">
+                    <button type="button" class="list-group-item small" (click)="onSelectFahrzeug(kfz.typ, fahrzeug)" *ngFor="let fahrzeug of listFahrzeuge">
+                        <b>{{fahrzeug.name}}</b><br />kW: {{fahrzeug.kw}}/Ps: {{fahrzeug.ps}}; Türen: {{fahrzeug.tueren}}; Zylinder: {{fahrzeug.zylinder}}; Sitzplätze: {{fahrzeug.sitze}}; Antrieb: {{fahrzeug.antrieb1}} {{fahrzeug.antrieb2}}<br />Importbeginn: {{fahrzeug.importStart}} / Importende: {{fahrzeug.importEnde}}<br /><h5 class="bg-success">Listenpreis: {{fahrzeug.neupreis}} (gültig ab: {{fahrzeug.preisAb}})</h5>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ### Eurotax Natcode -->
+<!-- Natcode <Input> Eurotax/Natcode-->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1) && (!isFahrzeugSelected)">
+    <!--Pkw / Lkw-->
+    <label for="kfzNatcode" class="col-sm-5 control-label">Nat-Code (Eurotax):</label>
+    <div class="col-sm-7">
+        <input type="text" id="kfzNatCodeSearch" name="kfzNatCodeSearch" class="form-control" placeholder="Natcode" aria-label="Natcode" [(ngModel)]="searchNatCode" (keyup)="onSearchNatCode(kfz.typ)" (focus)="onFocusNatCode(kfz.typ)" autocomplete="off" />
+    </div>
+</div>
+<!-- Liste Preishistory NatCode -->
+<div class="container">
+    <div style="position: absolute; width:100%; z-index:999;" [ngStyle]="{'visibility':isVisibleSearchNatCode?'visible':'hidden'}">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row bg-primary">
+                    <div class="col-sm-10">
+                        <h5 style="margin-left:0.5em;">Fahrzeugauswahl:</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-xs btn-danger" style="margin-top:7px; margin-left:10px;" (click)="onCloseNatCodeList()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 bg-info pull-right" style="border-bottom:5px solid green;">
+                <div class="list-group" style="min-height:50px; max-height:300px; overflow-y:scroll">
+                    <button type="button" class="list-group-item small" (click)="onSelectNatCode(kfz.typ, fahrzeug)" *ngFor="let fahrzeug of listNatCode">
+                        <b>{{fahrzeug.name}}</b><br />kW: {{fahrzeug.kw}}/Ps: {{fahrzeug.ps}}; Türen: {{fahrzeug.tueren}}; Zylinder: {{fahrzeug.zylinder}}; Sitzplätze: {{fahrzeug.sitze}}; Antrieb: {{fahrzeug.antrieb1}} {{fahrzeug.antrieb2}}<br />Importbeginn: {{fahrzeug.importStart}} / Importende: {{fahrzeug.importEnde}}<br /><h5 class="bg-success">Listenpreis: {{fahrzeug.neupreis}} (gültig ab: {{fahrzeug.preisAb}})</h5>
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-danger small" *ngIf="listNatCode == ''">
+                        <b>keine Treffer</b><br />unter diesem NatCode!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Marke <Input> Eurotax -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1 || kfz.eingabeArt == 2) && (isFahrzeugSelected)">
+    <!--Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+    <label for="kfzMarke" class="col-md-5 control-label">Marke:</label>
+    <div class="col-md-7">
+        <input type="text" id="kfzMarke" name="kfzMarke" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Marke" aria-label="Marke" [(ngModel)]="kfz.marke" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" disabled />
+    </div>
+</div>
+<!-- Modell/Typ <Input> Eurotax -->
+<div class="form-group form-group-sm bg-info" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1 || kfz.eingabeArt == 2) && (isFahrzeugSelected)">
+    <!--Pkw / Lkw / Motorrad / Moped / 3Rad / 4RadKl50 / 4RadGr50 / Zugmaschine / Anhänger-->
+    <label for="kfzModell" class="col-md-5 control-label">Modell/Typ:</label>
+    <div class="col-md-7">
+        <input type="text" id="kfzModell" name="kfzModell" class="form-control" [ngClass]="{required: modus == 'angebot' || modus == 'antrag'}" placeholder="Modell/Typ" aria-label="Modell/Typ" [(ngModel)]="kfz.modell" [required]="modus == 'angebot' || modus == 'antrag' ? 'required' : null" disabled />
+    </div>
+</div>
+
+<!-- NationalCode/Marke&Modell/Bearbeiten -->
+<div class="form-group form-group-sm" *ngIf="(kfz.typ == 'Pkw' || kfz.typ == 'Lkw') && (kfz.eingabeArt == 1 || kfz.eingabeArt == 2) && (isFahrzeugSelected)">
+    <!-- Pkw / Lkw -->
+    <div class="col-md-12">
+        <button type="button" class="btn btn-sm btn-primary pull-right" (click)="isFahrzeugSelected = false;">
+            Bearbeiten
+        </button>
+    </div>
+</div>

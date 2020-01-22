@@ -1,0 +1,285 @@
+﻿<!-- Vn Edit -->
+<vn-edit [modus]="modus"
+         [vn]="vnUpdate"
+         [isEnabledPFp]="isEnabledPFp"
+         [isEnabledPKv]="isEnabledPKv"
+         [isEnabledPUv]="isEnabledPUv"
+         [isEnabledPKfz]="isEnabledPKfz"
+         [isEnabledPHe]="isEnabledPHe"
+         [isEnabledPRs]="isEnabledPRs"
+         (onEmitVn)="onUpdateOk($event)"
+         *ngIf="vnUpdate !== undefined"></vn-edit>
+<div class="panel panel-default" *ngIf="vn && !vnUpdate">
+    <!-- Vn View -->
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-10 col-md-4">
+                Versicherungsnehmer ({{vn.id}}) - {{vn.vorname}} {{vn.nachname}}
+            </div>
+            <div class="col-xs-2 col-md-2">
+                <button type="button" class="btn btn-primary btn-xs" title="Versicherungsnehmer BEARBEITEN..." (click)="onUpdate(vn)" [disabled]="vnUpdate"><span class="glyphicon glyphicon-pencil" aria-hidden="true" #btnVnUpdate></span></button>
+                <button type="button" class="btn btn-danger btn-xs" title="Versicherungsnehmer LÖSCHEN..." (click)="onDelete(vn)" [disabled]="vnUpdate"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="vn && !vnUpdate">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Kundennr:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.kundennr}}</dd>
+                    <dt>Anrede/Titel:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd [ngSwitch]="[vn?.anrede]">
+                        <span class="label label-default" *ngSwitchCase="0">nichts ausgewählt</span>
+                        <span class="label label-default" *ngSwitchCase="1">Herr</span>
+                        <span class="label label-default" *ngSwitchCase="2">Frau</span>
+                        <span class="label label-default" *ngSwitchCase="3">Familie</span>
+                        <span class="label label-default" *ngSwitchCase="4">Firma</span> {{vn.titel}}
+                    </dd>
+                    <dt>Vorname:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.vorname}}</dd>
+                    <dt>Nachname:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.nachname}}</dd>
+                    <dt>Geburtsdatum:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.geburtsdatum | date:'dd.MM.yyyy'}}</dd>
+                    <dt>Alter:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.alter}} / ({{vn.alterVerstech}})</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Straße/Nr.:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.adresse.strasseNr}}</dd>
+                    <dt>Plz/Ort:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.adresse.plz}} {{vn.adresse.ort}}</dd>
+                    <dt>Tel:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.kontakt.tel}}</dd>
+                    <dt>Mobil:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.kontakt.mobil}}</dd>
+                    <dt>E-Mail:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.kontakt.email}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt *ngIf="(isEnabledPFp || isEnabledPKv)">Familienstand:</dt> <!--FP / KV-->
+                    <dd *ngIf="(isEnabledPFp || isEnabledPKv)" [ngSwitch]="vn.familienstand">
+                        <span class="label label-default" *ngSwitchCase="1">ledig</span>
+                        <span class="label label-default" *ngSwitchCase="2">verheiratet</span>
+                        <span class="label label-default" *ngSwitchCase="3">geschieden</span>
+                        <span class="label label-default" *ngSwitchCase="4">verwitwet</span>
+                        <span class="label label-default" *ngSwitchCase="5">Lebensgemeinschaft</span>
+                    </dd>
+                    <dt *ngIf="(isEnabledPFp || isEnabledPKv)">SV-Anstalt/Nr:</dt> <!--FP / KV / UV-->
+                    <dd *ngIf="(isEnabledPFp || isEnabledPKv)" [ngSwitch]="vn.svAnstalt">
+                        <span class="label label-default" *ngSwitchCase="1">GKK</span>
+                        <span class="label label-default" *ngSwitchCase="2">KFA</span>
+                        <span class="label label-default" *ngSwitchCase="3">GSKK/SL</span>
+                        <span class="label label-default" *ngSwitchCase="4">GSKK/GL</span>
+                        <span class="label label-default" *ngSwitchCase="5">BVA</span>
+                        <span class="label label-default" *ngSwitchCase="6">VAEB</span>
+                        <span class="label label-default" *ngSwitchCase="7">SVB</span>
+                        <span class="label label-default" *ngSwitchCase="8">BKK</span>
+                        <span class="label label-default" *ngSwitchCase="9">KFG</span>
+                        {{vn.svNr}}
+                    </dd>
+                    <dt *ngIf="(isEnabledPFp || isEnabledPKv)">Hausarzt</dt>
+                    <dd *ngIf="(isEnabledPFp || isEnabledPKv)">{{vn.hausarzt}}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt *ngIf="(isEnabledPKv || isEnabledPKfz || isEnabledPHe || isEnabledPRs)">Art der Beschäftigung:</dt> <!--KV / KFZ / HE / RS-->
+                    <dd *ngIf="(isEnabledPKv || isEnabledPKfz || isEnabledPHe || isEnabledPRs)" [ngSwitch]="vn.artBeschaeftigung">
+                        <span class="label label-default" *ngSwitchCase="2">unselbständig</span>
+                        <span class="label label-default" *ngSwitchCase="1">selbständig</span>
+                    </dd>
+                    <dt *ngIf="(isEnabledPKv || isEnabledPKfz || isEnabledPHe || isEnabledPRs)">Beruf:</dt> <!--KV / KFZ / HE / RS-->
+                    <dd *ngIf="(isEnabledPKv || isEnabledPKfz || isEnabledPHe || isEnabledPRs)" [ngSwitch]="vn.beruf">
+                        <span class="label label-default" *ngSwitchCase="'kan'">keine Angabe</span>
+                        <span class="label label-default" *ngSwitchCase="'nbt'">nicht berufstätig</span>
+                        <span class="label label-default" *ngSwitchCase="'aht'">Arbeiter im Hoch- und Tiefbau</span>
+                        <span class="label label-default" *ngSwitchCase="'lwf'">Landwirte, Wald- und Forstarbeiter</span>
+                        <span class="label label-default" *ngSwitchCase="'dsz'">Dachdecker, Spengler, Zimmermann</span>
+                        <span class="label label-default" *ngSwitchCase="'hbv'">Holzbearbeiter, -verarbeiter</span>
+                        <span class="label label-default" *ngSwitchCase="'pia'">Polizist im Außendienst</span>
+                        <span class="label label-default" *ngSwitchCase="'azt'">Arzt, Zahnarzt, Tierarzt, Zahntechniker oder Musiker (erhöhte Gliedertaxe)</span>
+                        <span class="label label-default" *ngSwitchCase="'aab'">Alle anderen Berufe</span>
+                    </dd>
+                    <dt *ngIf="(isEnabledPKfz)">bes. Arbeitgeber:</dt> <!-- KFZ -->
+                    <dd *ngIf="(isEnabledPKfz)">
+                        <span class="label label-default">{{vn.besondererArbeitgeber}}</span>
+                    </dd>
+                    <dt *ngIf="(isEnabledPKfz) && (vn.besondererArbeitgeber != '' && vn.besondererArbeitgeber != 'Nein')">bes. Beruf:</dt> <!-- KFZ -->
+                    <dd *ngIf="(isEnabledPKfz) && (vn.besondererArbeitgeber != '' && vn.besondererArbeitgeber != 'Nein')">
+                        <span class="label label-default">{{vn.besondererBeruf}}</span>
+                    </dd>
+                    <dt *ngIf="(isEnabledPKfz) && (vn.besondererArbeitgeber != '' && vn.besondererArbeitgeber != 'Nein')">Dienstort:</dt> <!-- KFZ -->
+                    <dd *ngIf="(isEnabledPKfz) && (vn.besondererArbeitgeber != '' && vn.besondererArbeitgeber != 'Nein')">
+                        {{vn.besondererDienstort}}
+                    </dd>
+                    <dt *ngIf="(isEnabledPKv || isEnabledPHe)">Nationalität:</dt> <!--KV / HE-->
+                    <dd *ngIf="(isEnabledPKv || isEnabledPHe)">{{vn.nationalitaet}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal" *ngIf="(isEnabledPKfz)">
+                    <dt>EU-Bürger:</dt>
+                    <dd [ngSwitch]="vn.isEuBuerger">
+                        <span class="label label-default" *ngSwitchCase="true">Ja</span>
+                        <span class="label label-default" *ngSwitchCase="false">Nein</span>
+                    </dd>
+                    <dt>Probeführerschein:</dt>
+                    <dd [ngSwitch]="vn.hasProbefuehrerschein">
+                        <span class="label label-default" *ngSwitchCase="true">Ja</span>
+                        <span class="label label-default" *ngSwitchCase="false">Nein</span>
+                    </dd>
+                    <dt>Führerschein seit/von:</dt>
+                    <dd>{{vn.fuehrerscheinSeitVon}}</dd>
+                    <dt>Führerscheingruppe:</dt>
+                    <dd>{{vn.fuehrerscheinGruppe}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Vn ist Kontoinhaber:</dt>
+                    <dd [ngSwitch]="vn.isVnKontoinhaber">
+                        <span class="label label-default" *ngSwitchCase="true">Ja</span>
+                        <span class="label label-default" *ngSwitchCase="false">Nein</span>
+                    </dd>
+                    <dt *ngIf="!vn.isVnKontoinhaber">Kontoinhaber:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd *ngIf="!vn.isVnKontoinhaber">{{vn.bankdaten.kontoinhaber}}</dd>
+                    <dt *ngIf="!vn.isVnKontoinhaber">Straße/Nr.:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd *ngIf="!vn.isVnKontoinhaber">{{vn.bankdaten.strasseNr}}</dd>
+                    <dt *ngIf="!vn.isVnKontoinhaber">Plz/Ort:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd *ngIf="!vn.isVnKontoinhaber">{{vn.bankdaten.plz}} {{vn.bankdaten.ort}}</dd>
+                    <dt>IBAN:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.bankdaten.iban}}</dd>
+                    <dt>BIC:</dt> <!--FP / KV / UV / KFZ / HE / RS-->
+                    <dd>{{vn.bankdaten.bic}}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr *ngIf="(isEnabledPUv)" />
+        <div class="row" *ngIf="(isEnabledPUv)">
+            <div class="col-md-4" *ngIf="(isEnabledPUv)">
+                <dl class="dl-horizontal">
+                    <dt>Bezugs­berechtigt im<br />Ablebensfall durch<br />Unfall:</dt>
+                    <dd [ngSwitch]="vn.isBezugsberechtigt">
+                        <span class="label label-default" *ngSwitchCase="1">der Überbringer der Polizze</span>
+                        <span class="label label-default" *ngSwitchCase="2">die Erben</span>
+                        <span class="label label-default" *ngSwitchCase="3">nachstehend bezeichnete Person/Personen</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-3" *ngIf="vn.isBezugsberechtigt == 3">
+                <dl class="dl-horizontal">
+                    <dt>Vorname:</dt>
+                    <dd>{{vn.bezugsberechtigt.vorname}}</dd>
+                    <dt>Nachname:</dt>
+                    <dd>{{vn.bezugsberechtigt.nachname}}</dd>
+                    <dt>Geburtsdatum:</dt>
+                    <dd>{{vn.bezugsberechtigt.geburtsdatum}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-5" *ngIf="vn.isBezugsberechtigt == 3">
+                <dl class="dl-horizontal">
+                    <dt>Weitere Personen:</dt>
+                    <dd>{{vn.bezugsberechtigt.weiterePerson}}</dd>
+                </dl>
+            </div>
+        </div>
+        <hr *ngIf="(isEnabledPKfz || isEnabledPRs)" /> <!--KFZ / RS-->
+        <div class="row" *ngIf="(isEnabledPKfz || isEnabledPRs)">
+            <!--KFZ / RS-->
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Weitere<br />Versicherungsnehmer:</dt>
+                    <dd [ngSwitch]="vn.hasWeitereVn">
+                        <span class="label label-default" *ngSwitchCase="true">Ja</span>
+                        <span class="label label-default" *ngSwitchCase="false">Nein</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4" *ngIf="vn.hasWeitereVn">
+                <dl class="dl-horizontal">
+                    <dt>Anrede/Titel:</dt>
+                    <dd [ngSwitch]="vn.weitereVn.anrede">
+                        <span class="label label-default" *ngSwitchCase="1">Herr</span>
+                        <span class="label label-default" *ngSwitchCase="2">Frau</span>
+                        <span class="label label-default" *ngSwitchCase="3">Familie</span>
+                        <span class="label label-default" *ngSwitchCase="4">Firma</span> {{vn.weitereVn.titel}}
+                    </dd>
+                    <dt>Vorname:</dt>
+                    <dd>{{vn.weitereVn.vorname}}</dd>
+                    <dt>Nachname:</dt>
+                    <dd>{{vn.weitereVn.nachname}}</dd>
+                    <dt>Geburtsdatum:</dt>
+                    <dd>{{vn.weitereVn.geburtsdatum}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4" *ngIf="vn.hasWeitereVn">
+                <dl class="dl-horizontal">
+                    <dt>Straße/Nr:</dt>
+                    <dd>{{vn.weitereVn.adresse.strasseNr}}</dd>
+                    <dt>Plz/Ort:</dt>
+                    <dd>{{vn.weitereVn.adresse.plz}} - {{vn.weitereVn.adresse.ort}}</dd>
+                    <dt>Art der Beschäftigung:</dt>
+                    <dd [ngSwitch]="vn.weitereVn.artBeschaeftigung">
+                        <span class="label label-default" *ngSwitchCase="2">unselbständig</span>
+                        <span class="label label-default" *ngSwitchCase="1">selbständig</span>
+                    </dd>
+                    <dt>Beruf:</dt>
+                    <dd [ngSwitch]="vn.weitereVn.beruf">
+                        <span class="label label-default" *ngSwitchCase="'kan'">keine Angabe</span>
+                        <span class="label label-default" *ngSwitchCase="'nbt'">nicht berufstätig</span>
+                        <span class="label label-default" *ngSwitchCase="'aht'">Arbeiter im Hoch- und Tiefbau</span>
+                        <span class="label label-default" *ngSwitchCase="'lwf'">Landwirte, Wald- und Forstarbeiter</span>
+                        <span class="label label-default" *ngSwitchCase="'dsz'">Dachdecker, Spengler, Zimmermann</span>
+                        <span class="label label-default" *ngSwitchCase="'hbv'">Holzbearbeiter, -verarbeiter</span>
+                        <span class="label label-default" *ngSwitchCase="'pia'">Polizist im Außendienst</span>
+                        <span class="label label-default" *ngSwitchCase="'azt'">Arzt, Zahnarzt, Tierarzt, Zahntechniker oder Musiker (erhöhte Gliedertaxe)</span>
+                        <span class="label label-default" *ngSwitchCase="'aab'">Alle anderen Berufe</span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <hr *ngIf="(isEnabledPKfz || isEnabledPHe)" /> <!--KFZ / HE-->
+        <div class="row" *ngIf="(isEnabledPKfz || isEnabledPHe)">
+            <!--KFZ / HE-->
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>Inkassoadresse<br />abweichend:</dt>
+                    <dd [ngSwitch]="vn.hasAbweichendeInkassoAdr">
+                        <span class="label label-default" *ngSwitchCase="true">Ja</span>
+                        <span class="label label-default" *ngSwitchCase="false">Nein</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4" *ngIf="vn.hasAbweichendeInkassoAdr">
+                <dl class="dl-horizontal">
+                    <dt>Anrede/Titel:</dt>
+                    <dd [ngSwitch]="vn.inkassoAdr.anrede">
+                        <span class="label label-default" *ngSwitchCase="1">Herr</span>
+                        <span class="label label-default" *ngSwitchCase="2">Frau</span> {{vn.inkassoAdr.titel}}
+                    </dd>
+                    <dt>Vorname:</dt>
+                    <dd>{{vn.inkassoAdr.vorname}}</dd>
+                    <dt>Nachname:</dt>
+                    <dd>{{vn.inkassoAdr.nachname}}</dd>
+                </dl>
+            </div>
+            <div class="col-md-4" *ngIf="vn.hasAbweichendeInkassoAdr">
+                <dl class="dl-horizontal">
+                    <dt>Straße/Nr:</dt>
+                    <dd>{{vn.inkassoAdr.adresse.strasseNr}}</dd>
+                    <dt>Plz/Ort:</dt>
+                    <dd>{{vn.inkassoAdr.adresse.plz}} - {{vn.inkassoAdr.adresse.ort}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
