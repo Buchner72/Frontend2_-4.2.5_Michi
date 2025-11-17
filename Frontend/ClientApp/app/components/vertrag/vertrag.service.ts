@@ -640,8 +640,11 @@ export class VertragService {
 
     // get new Vn
     newVn(): Observable<Vn> {
+        const url = this.baseUrl.endsWith('/') 
+            ? this.baseUrl + 'api/Vertrag/NewVn' 
+            : this.baseUrl + '/api/Vertrag/NewVn';
         return this.http
-            .get(this.baseUrl + '/api/Vertrag/NewVn')
+            .get(url)
             .map(this.extractVn)
             .catch(this.handleError)
     }

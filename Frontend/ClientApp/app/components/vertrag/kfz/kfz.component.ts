@@ -104,6 +104,23 @@ export class KfzComponent implements OnInit, OnChanges {
 
     // new Kfz
     onKfzNew(typ: string): void {
+        // Panel öffnen, falls es geschlossen ist (synchron setzen)
+        if (!this.isCollapsed) {
+            this.isCollapsed = true;
+            // Asynchron speichern, aber UI sofort aktualisieren
+            this.vertragService.toggleCollapseablePKfz(this.isCollapsed)
+                .subscribe(
+                    isCollapsedPKfz => {
+                        // Falls der Service einen anderen Wert zurückgibt, verwenden wir ihn
+                        // Ansonsten bleibt isCollapsed = true
+                        if (isCollapsedPKfz !== undefined) {
+                            this.isCollapsed = isCollapsedPKfz;
+                        }
+                    },
+                    error => this.errMsg = <any>error
+                );
+        }
+        //
         this.vertragProgressService.increment(50);
         //
         switch (typ) {
@@ -161,6 +178,10 @@ export class KfzComponent implements OnInit, OnChanges {
                     .getKfzNew("Pkw")
                     .subscribe(
                         pkw => {
+                            // Sicherstellen, dass das Panel geöffnet ist, wenn die Daten geladen sind
+                            if (!this.isCollapsed) {
+                                this.isCollapsed = true;
+                            }
                             this.kfzNew.id = pkw.id;
 
                             this.kfzNew.vertrag = pkw.vertrag;

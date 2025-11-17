@@ -17,51 +17,48 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="btn-group btn-group-xs" dropdown>
-                        <button type="button" class="btn btn-primary btn-xs disabled" title="Fahrzeug NEU..." *ngIf="vn == undefined || vn?.alter < 15">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Fahrzeug <span class="caret" aria-hidden="true"></span>
-                        </button>
-                        <button type="button" class="btn btn-primary btn-xs" title="Fahrzeug NEU..." dropdownToggle *ngIf="vn?.alter >= 15">
+                        <button type="button" class="btn btn-primary btn-xs" title="Fahrzeug NEU..." dropdownToggle>
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Fahrzeug <span class="caret" aria-hidden="true"></span>
                         </button>
                         <ul *dropdownMenu class="dropdown-menu" role="menu">
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Pkw/Kombi</a>
-                                <a role="button" (click)="onKfzNew('Pkw')" *ngIf="!vn.hasErrorVn_Alter21">Pkw/Kombi</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Pkw/Kombi</a>
+                                <a role="button" (click)="onKfzNew('Pkw')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Pkw/Kombi</a>
                             </li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
-                                <a role="button" (click)="onKfzNew('Lkw')" *ngIf="!vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
+                                <a role="button" (click)="onKfzNew('Lkw')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Lkw/Wohnmobil</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
-                                <a role="button" (click)="onKfzNew('Motorrad')" *ngIf="!vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
+                                <a role="button" (click)="onKfzNew('Motorrad')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Zweirad/Motorrad</a>
                             </li>
                             <li role="menuitem">
                                 <a role="button" (click)="onKfzNew('Moped')">Zweirad/Moped</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Dreirad</a>
-                                <a role="button" (click)="onKfzNew('Dreirad')" *ngIf="!vn.hasErrorVn_Alter21">Dreirad</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Dreirad</a>
+                                <a role="button" (click)="onKfzNew('Dreirad')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Dreirad</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
-                                <a role="button" (click)="onKfzNew('VierradKl50')" *ngIf="!vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
+                                <a role="button" (click)="onKfzNew('VierradKl50')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Vierrad bis 50 ccm</a>
                             </li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
-                                <a role="button" (click)="onKfzNew('VierradGr50')" *ngIf="!vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
+                                <a role="button" (click)="onKfzNew('VierradGr50')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Vierrad über 50 ccm</a>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Zugmaschine</a>
-                                <a role="button" (click)="onKfzNew('Zugmaschine')" *ngIf="!vn.hasErrorVn_Alter21">Zugmaschine</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Zugmaschine</a>
+                                <a role="button" (click)="onKfzNew('Zugmaschine')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Zugmaschine</a>
                             </li>
-                            <li role="menuitem" [ngClass]="{disabled: vn.hasErrorVn_Alter21}">
-                                <a role="button" style="text-decoration:line-through" *ngIf="vn.hasErrorVn_Alter21">Anhänger</a>
-                                <a role="button" (click)="onKfzNew('Anhaenger')" *ngIf="!vn.hasErrorVn_Alter21">Anhänger</a>
+                            <li role="menuitem" [ngClass]="{disabled: vn && vn.hasErrorVn_Alter21}">
+                                <a role="button" style="text-decoration:line-through" *ngIf="vn && vn.hasErrorVn_Alter21">Anhänger</a>
+                                <a role="button" (click)="onKfzNew('Anhaenger')" *ngIf="!vn || !vn.hasErrorVn_Alter21">Anhänger</a>
                             </li>
                         </ul>
                     </div>

@@ -106,6 +106,23 @@ export class VnComponent implements OnInit {
 
     // Vn New
     onVnNew(): void {
+        // Panel öffnen, falls es geschlossen ist (synchron setzen)
+        if (!this.isCollapsed) {
+            this.isCollapsed = true;
+            // Asynchron speichern, aber UI sofort aktualisieren
+            this.vertragService.toggleCollapseableVn(this.isCollapsed)
+                .subscribe(
+                    isCollapsedVn => {
+                        // Falls der Service einen anderen Wert zurückgibt, verwenden wir ihn
+                        // Ansonsten bleibt isCollapsed = true
+                        if (isCollapsedVn !== undefined) {
+                            this.isCollapsed = isCollapsedVn;
+                        }
+                    },
+                    error => this.errMsg = <any>error
+                );
+        }
+        //
         this.vertragProgressService.increment(50);
         //
         this.vertragService
@@ -113,6 +130,10 @@ export class VnComponent implements OnInit {
             .subscribe(
                 vn => {
                     this.vnNew = vn;
+                    // Sicherstellen, dass das Panel geöffnet ist, wenn die Daten geladen sind
+                    if (!this.isCollapsed) {
+                        this.isCollapsed = true;
+                    }
                 },
                 error => this.errMsg = <any>error
             );
