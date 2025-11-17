@@ -10,6 +10,8 @@ import {
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -33,6 +35,22 @@ import { Anhaenger } from './kfz/_model/kfz-anhaenger.model';
 @Injectable()
 export class VertragService {
     private baseUrl: string;
+    private useMockData: boolean = true; // Mock-Modus aktivieren
+    // Mock-Daten
+    private mockData = {
+        plattform: 'muki',
+        modus: 'angebot',
+        kunde: 'privat',
+        isEnabledPFp: false,
+        isEnabledPKv: false,
+        isEnabledPUv: false,
+        isEnabledPUvk: false,
+        isEnabledPKfz: false,
+        isEnabledPHe: false,
+        isEnabledPRs: false,
+        isEnabledGKfz: false,
+        isEnabledGGeb: false
+    };
 
     constructor(private http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
@@ -40,6 +58,22 @@ export class VertragService {
 
     // Reset Vertragscontainer
     reset(): Observable<boolean> {
+        if (this.useMockData) {
+            // Mock-Daten zurücksetzen
+            this.mockData.plattform = 'muki';
+            this.mockData.modus = 'angebot';
+            this.mockData.kunde = 'privat';
+            this.mockData.isEnabledPFp = false;
+            this.mockData.isEnabledPKv = false;
+            this.mockData.isEnabledPUv = false;
+            this.mockData.isEnabledPUvk = false;
+            this.mockData.isEnabledPKfz = false;
+            this.mockData.isEnabledPHe = false;
+            this.mockData.isEnabledPRs = false;
+            this.mockData.isEnabledGKfz = false;
+            this.mockData.isEnabledGGeb = false;
+            return Observable.of(true).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/Reset')
             .map(res => {
@@ -88,6 +122,9 @@ export class VertragService {
 
     // Plattform = tis/muki
     getPlattform(): Observable<string> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.plattform).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetPlattform')
             .map(res => { return res.text() || {} })
@@ -96,6 +133,9 @@ export class VertragService {
 
     // Modus = angebot/antrag
     getModus(): Observable<string> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.modus).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetModus')
             .map(res => { return res.text() || {} })
@@ -103,6 +143,10 @@ export class VertragService {
     }
 
     setModus(modus: string): Observable<string> {
+        if (this.useMockData) {
+            this.mockData.modus = modus;
+            return Observable.of(modus).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/SetModus?modus=' + modus)
             .map(res => { return res.text() || {} })
@@ -111,6 +155,9 @@ export class VertragService {
 
     // Kunde = privat/firma
     getKunde(): Observable<string> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.kunde).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetKunde')
             .map(res => { return res.text() || {} })
@@ -118,6 +165,10 @@ export class VertragService {
     }
 
     setKunde(kunde: string): Observable<string> {
+        if (this.useMockData) {
+            this.mockData.kunde = kunde;
+            return Observable.of(kunde).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/SetKunde?kunde=' + kunde)
             .map(res => { return res.text() || {} })
@@ -342,6 +393,10 @@ export class VertragService {
 
     // Fp Enableable
     toggleEnableablePFp(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPFp = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePFp?value=' + value)
             .map(res => {
@@ -355,6 +410,9 @@ export class VertragService {
     }
 
     getEnableablePFp(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPFp).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePFp')
             .map(res => {
@@ -369,6 +427,10 @@ export class VertragService {
 
     // Kv Enableable
     toggleEnableablePKv(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPKv = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePKv?value=' + value)
             .map(res => {
@@ -382,6 +444,9 @@ export class VertragService {
     }
 
     getEnableablePKv(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPKv).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePKv')
             .map(res => {
@@ -396,6 +461,10 @@ export class VertragService {
 
     // Uv Enableable
     toggleEnableablePUv(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPUv = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePUv?value=' + value)
             .map(res => {
@@ -409,6 +478,9 @@ export class VertragService {
     }
 
     getEnableablePUv(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPUv).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePUv')
             .map(res => {
@@ -423,6 +495,10 @@ export class VertragService {
 
     // Uvk Enableable
     toggleEnableablePUvk(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPUvk = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePUvk?value=' + value)
             .map(res => {
@@ -436,6 +512,9 @@ export class VertragService {
     }
 
     getEnableablePUvk(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPUvk).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePUvk')
             .map(res => {
@@ -450,6 +529,10 @@ export class VertragService {
 
     // Kfz Enableable
     toggleEnableablePKfz(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPKfz = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePKfz?value=' + value)
             .map(res => {
@@ -463,6 +546,9 @@ export class VertragService {
     }
 
     getEnableablePKfz(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPKfz).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePKfz')
             .map(res => {
@@ -477,6 +563,10 @@ export class VertragService {
 
     // He Enableable
     toggleEnableablePHe(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPHe = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePHe?value=' + value)
             .map(res => {
@@ -490,6 +580,9 @@ export class VertragService {
     }
 
     getEnableablePHe(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPHe).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePHe')
             .map(res => {
@@ -504,6 +597,10 @@ export class VertragService {
 
     // Rs Enableable
     toggleEnableablePRs(value: boolean): Observable<boolean> {
+        if (this.useMockData) {
+            this.mockData.isEnabledPRs = value;
+            return Observable.of(value).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/ToggleEnableablePRs?value=' + value)
             .map(res => {
@@ -517,6 +614,9 @@ export class VertragService {
     }
 
     getEnableablePRs(): Observable<boolean> {
+        if (this.useMockData) {
+            return Observable.of(this.mockData.isEnabledPRs).delay(100);
+        }
         return this.http
             .get(this.baseUrl + '/api/Vertrag/GetEnableablePRs')
             .map(res => {

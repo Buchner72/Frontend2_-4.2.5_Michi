@@ -104,11 +104,11 @@
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="plattform == 'muki'">
+        <div class="row" *ngIf="plattform == 'muki' || !plattform">
             <div class="col-md-12">
                 <h4>Sparten:</h4>
                 <!-- Privat -->
-                <div class="btn-group-sm btn-group-justified" *ngIf="kunde == 'privat'">
+                <div class="btn-group-sm btn-group-justified" *ngIf="kunde == 'privat' || !kunde">
                     <label class="btn btn-default btn-sm" title="Sparte Person / FamilyPlus" [ngClass]="{active: isEnabledPFp == true}">
                         <input type="checkbox" #spartePFp id="spartePFp" autocomplete="off" style="visibility:hidden; width:0px;" (click)="onToggleEnableablePFp(spartePFp.checked)" [(ngModel)]="isEnabledPFp" /> <span class="label label-primary">P</span>&nbsp;FP
                     </label>
